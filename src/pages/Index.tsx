@@ -52,10 +52,17 @@ const projectsData = [
   },
 ];
 
+const skillsData = {
+  "Frontend Technologies": ["React", "Vue.js", "TypeScript", "Tailwind CSS", "Next.js"],
+  "Backend Technologies": ["Node.js", "Express", "NestJS", "GraphQL"],
+  "Databases": ["PostgreSQL", "MongoDB", "Redis", "MySQL"],
+  "DevOps & Tools": ["Docker", "Kubernetes", "AWS", "Git", "CI/CD"],
+};
+
 const Index = () => {
   return (
     <div className="min-h-screen">
-      <header className="fixed top-0 left-0 right-0 h-16 border-b bg-background/80 backdrop-blur-sm md:pl-72 z-50">
+      <header className="fixed top-0 left-0 right-0 h-16 border-b bg-background/80 backdrop-blur-sm md:pl-72 z-50 md:hidden">
         <div className="flex items-center justify-between h-full px-4">
           <MobileNav />
         </div>
@@ -89,6 +96,24 @@ const Index = () => {
                         <li key={i}>{course}</li>
                       ))}
                     </ul>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </section>
+
+          <section id="skills" className="section-scroll">
+            <h2 className="text-2xl font-bold mb-4">Skills</h2>
+            <div className="grid gap-6 md:grid-cols-2">
+              {Object.entries(skillsData).map(([category, skills]) => (
+                <Card key={category} className="p-6">
+                  <h3 className="font-bold mb-4">{category}</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {skills.map((skill, index) => (
+                      <Badge key={index} variant="secondary">
+                        {skill}
+                      </Badge>
+                    ))}
                   </div>
                 </Card>
               ))}
