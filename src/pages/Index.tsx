@@ -2,6 +2,7 @@ import { MobileNav } from "@/components/MobileNav";
 import { Sidebar } from "@/components/Sidebar";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { GraduationCap, BookOpen, Code, Globe, Database, Laptop, Server, Wrench } from "lucide-react";
 
 const educationData = [
   {
@@ -72,8 +73,8 @@ const Index = () => {
 
       <main className="pt-16 md:pl-72">
         <div className="container py-8 space-y-16">
-          {/* Hero Section */}
-          <section className="min-h-[60vh] flex flex-col justify-center animate-fade-in">
+          {/* Hero Section - Only visible on mobile */}
+          <section className="md:hidden min-h-[60vh] flex flex-col justify-center animate-fade-in">
             <h1 className="text-4xl md:text-5xl font-bold mb-4 animate-slide-in-right">
               John Doe
             </h1>
@@ -95,11 +96,17 @@ const Index = () => {
           </section>
 
           <section id="education" className="section-scroll animate-fade-in">
-            <h2 className="text-2xl font-bold mb-4">Education</h2>
+            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+              <GraduationCap className="h-6 w-6" />
+              Education
+            </h2>
             <div className="grid gap-4">
               {educationData.map((edu, index) => (
                 <Card key={index} className="p-6 group hover:shadow-lg transition-shadow animate-fade-in" style={{ animationDelay: `${index * 200}ms` }}>
-                  <h3 className="font-bold">{edu.degree}</h3>
+                  <div className="flex items-center gap-2">
+                    <BookOpen className="h-5 w-5 text-muted-foreground" />
+                    <h3 className="font-bold">{edu.degree}</h3>
+                  </div>
                   <p className="text-muted-foreground">{edu.school}</p>
                   <p className="text-sm text-muted-foreground">{edu.year}</p>
                   <div className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -116,11 +123,20 @@ const Index = () => {
           </section>
 
           <section id="skills" className="section-scroll animate-fade-in">
-            <h2 className="text-2xl font-bold mb-4">Skills</h2>
+            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+              <Wrench className="h-6 w-6" />
+              Skills
+            </h2>
             <div className="grid gap-6 md:grid-cols-2">
               {Object.entries(skillsData).map(([category, skills], index) => (
                 <Card key={category} className="p-6 animate-fade-in" style={{ animationDelay: `${index * 200}ms` }}>
-                  <h3 className="font-bold mb-4">{category}</h3>
+                  <h3 className="font-bold mb-4 flex items-center gap-2">
+                    {category === "Frontend Technologies" && <Globe className="h-5 w-5" />}
+                    {category === "Backend Technologies" && <Server className="h-5 w-5" />}
+                    {category === "Databases" && <Database className="h-5 w-5" />}
+                    {category === "DevOps & Tools" && <Code className="h-5 w-5" />}
+                    {category}
+                  </h3>
                   <div className="flex flex-wrap gap-2">
                     {skills.map((skill, index) => (
                       <Badge key={index} variant="secondary" className="hover:scale-105 transition-transform">
