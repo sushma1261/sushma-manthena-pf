@@ -75,10 +75,10 @@ const Index = () => {
         <div className="container py-8 space-y-16">
           {/* Hero Section - Only visible on mobile */}
           <section className="md:hidden min-h-[60vh] flex flex-col justify-center animate-fade-in">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 animate-slide-in-right">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 animate-slide-in-right text-primary">
               John Doe
             </h1>
-            <h2 className="text-2xl md:text-3xl text-muted-foreground mb-6 animate-slide-in-right" style={{ animationDelay: "200ms" }}>
+            <h2 className="text-2xl md:text-3xl text-accent mb-6 animate-slide-in-right" style={{ animationDelay: "200ms" }}>
               Software Developer
             </h2>
             <p className="text-lg text-muted-foreground max-w-lg animate-slide-in-right" style={{ animationDelay: "400ms" }}>
@@ -87,7 +87,7 @@ const Index = () => {
           </section>
 
           <section id="about" className="section-scroll animate-fade-in">
-            <h2 className="text-2xl font-bold mb-4">About Me</h2>
+            <h2 className="text-2xl font-bold mb-4 text-primary">About Me</h2>
             <p className="text-muted-foreground">
               I'm a passionate software developer with expertise in building scalable web applications.
               With over 4 years of experience, I specialize in creating efficient and user-friendly
@@ -96,21 +96,21 @@ const Index = () => {
           </section>
 
           <section id="education" className="section-scroll animate-fade-in">
-            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 text-primary">
               <GraduationCap className="h-6 w-6" />
               Education
             </h2>
             <div className="grid gap-4">
               {educationData.map((edu, index) => (
-                <Card key={index} className="p-6 group hover:shadow-lg transition-shadow animate-fade-in" style={{ animationDelay: `${index * 200}ms` }}>
+                <Card key={index} className="p-6 group hover:shadow-lg transition-shadow animate-fade-in bg-card hover:bg-accent/5" style={{ animationDelay: `${index * 200}ms` }}>
                   <div className="flex items-center gap-2">
-                    <BookOpen className="h-5 w-5 text-muted-foreground" />
-                    <h3 className="font-bold">{edu.degree}</h3>
+                    <BookOpen className="h-5 w-5 text-accent" />
+                    <h3 className="font-bold text-primary">{edu.degree}</h3>
                   </div>
                   <p className="text-muted-foreground">{edu.school}</p>
                   <p className="text-sm text-muted-foreground">{edu.year}</p>
                   <div className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <p className="font-medium">Relevant Courses:</p>
+                    <p className="font-medium text-primary">Relevant Courses:</p>
                     <ul className="list-disc list-inside text-sm text-muted-foreground">
                       {edu.courses.map((course, i) => (
                         <li key={i}>{course}</li>
@@ -123,23 +123,23 @@ const Index = () => {
           </section>
 
           <section id="skills" className="section-scroll animate-fade-in">
-            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 text-primary">
               <Wrench className="h-6 w-6" />
               Skills
             </h2>
             <div className="grid gap-6 md:grid-cols-2">
               {Object.entries(skillsData).map(([category, skills], index) => (
-                <Card key={category} className="p-6 animate-fade-in" style={{ animationDelay: `${index * 200}ms` }}>
-                  <h3 className="font-bold mb-4 flex items-center gap-2">
-                    {category === "Frontend Technologies" && <Globe className="h-5 w-5" />}
-                    {category === "Backend Technologies" && <Server className="h-5 w-5" />}
-                    {category === "Databases" && <Database className="h-5 w-5" />}
-                    {category === "DevOps & Tools" && <Code className="h-5 w-5" />}
+                <Card key={category} className="p-6 animate-fade-in bg-card hover:bg-accent/5" style={{ animationDelay: `${index * 200}ms` }}>
+                  <h3 className="font-bold mb-4 flex items-center gap-2 text-primary">
+                    {category === "Frontend Technologies" && <Globe className="h-5 w-5 text-accent" />}
+                    {category === "Backend Technologies" && <Server className="h-5 w-5 text-accent" />}
+                    {category === "Databases" && <Database className="h-5 w-5 text-accent" />}
+                    {category === "DevOps & Tools" && <Code className="h-5 w-5 text-accent" />}
                     {category}
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {skills.map((skill, index) => (
-                      <Badge key={index} variant="secondary" className="hover:scale-105 transition-transform">
+                      <Badge key={index} variant="secondary" className="hover:scale-105 transition-transform bg-accent/10 text-accent hover:bg-accent/20">
                         {skill}
                       </Badge>
                     ))}
@@ -150,15 +150,15 @@ const Index = () => {
           </section>
 
           <section id="experience" className="section-scroll animate-fade-in">
-            <h2 className="text-2xl font-bold mb-4">Experience</h2>
+            <h2 className="text-2xl font-bold mb-4 text-primary">Experience</h2>
             <div className="space-y-8">
               {experienceData.map((exp, index) => (
                 <div key={index} className="grid grid-cols-[1fr,3fr] gap-4 animate-fade-in" style={{ animationDelay: `${index * 200}ms` }}>
-                  <div className="text-sm text-muted-foreground">{exp.dates}</div>
+                  <div className="text-sm text-accent">{exp.dates}</div>
                   <div>
-                    <h3 className="font-bold">{exp.role}</h3>
+                    <h3 className="font-bold text-primary">{exp.role}</h3>
                     <p className="text-muted-foreground">{exp.company}</p>
-                    <p className="text-sm font-medium mt-2">{exp.project}</p>
+                    <p className="text-sm font-medium mt-2 text-accent">{exp.project}</p>
                     <ul className="list-disc list-inside text-sm text-muted-foreground mt-2">
                       {exp.responsibilities.map((resp, i) => (
                         <li key={i}>{resp}</li>
@@ -171,23 +171,23 @@ const Index = () => {
           </section>
 
           <section id="projects" className="section-scroll animate-fade-in">
-            <h2 className="text-2xl font-bold mb-4">Projects</h2>
+            <h2 className="text-2xl font-bold mb-4 text-primary">Projects</h2>
             <div className="grid gap-6 md:grid-cols-2">
               {projectsData.map((project, index) => (
-                <Card key={index} className="overflow-hidden hover:scale-105 transition-transform animate-fade-in" style={{ animationDelay: `${index * 200}ms` }}>
+                <Card key={index} className="overflow-hidden hover:scale-105 transition-transform animate-fade-in bg-card hover:bg-accent/5" style={{ animationDelay: `${index * 200}ms` }}>
                   <img
                     src={project.image}
                     alt={project.title}
                     className="w-full h-48 object-cover"
                   />
                   <div className="p-6">
-                    <h3 className="font-bold">{project.title}</h3>
+                    <h3 className="font-bold text-primary">{project.title}</h3>
                     <p className="text-sm text-muted-foreground mt-2">
                       {project.description}
                     </p>
                     <div className="flex flex-wrap gap-2 mt-4">
                       {project.skills.map((skill, i) => (
-                        <Badge key={i} variant="secondary">
+                        <Badge key={i} variant="secondary" className="bg-accent/10 text-accent hover:bg-accent/20">
                           {skill}
                         </Badge>
                       ))}
