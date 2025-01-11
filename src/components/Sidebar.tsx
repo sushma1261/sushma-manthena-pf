@@ -5,11 +5,12 @@ import { ThemeToggle } from "./ThemeToggle";
 const sections = [
   { id: "about", label: "About" },
   { id: "education", label: "Education" },
+  { id: "skills", label: "Skills" },
   { id: "experience", label: "Experience" },
   { id: "projects", label: "Projects" },
 ];
 
-export function Sidebar() {
+export function Sidebar({ activeSection, setActiveSection }) {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -18,16 +19,12 @@ export function Sidebar() {
   };
 
   return (
-    <aside className="hidden md:flex flex-col justify-between fixed left-0 top-0 h-screen w-72 p-8 border-r">
+    <aside className="hidden md:flex flex-col justify-between fixed left-0 top-0 h-screen w-80 p-8">
       <div className="space-y-8">
-        <div>
+        <div className="mt-8">
           <h1 className="text-2xl font-bold">Sushma Manthena</h1>
           <p className="text-muted-foreground">Software Developer</p>
-          <p className="mt-2 text-sm">
-            Building digital experiences with passion and precision
-          </p>
         </div>
-
         <nav className="space-y-2">
           {sections.map((section) => (
             <Button
@@ -46,7 +43,7 @@ export function Sidebar() {
         <div className="flex gap-2">
           <Button variant="ghost" size="icon" asChild>
             <a
-              href="https://github.com"
+              href="https://github.com/sushma1261"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -55,7 +52,7 @@ export function Sidebar() {
           </Button>
           <Button variant="ghost" size="icon" asChild>
             <a
-              href="https://linkedin.com"
+              href="https://linkedin.com/in/sushma-varma"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -63,7 +60,7 @@ export function Sidebar() {
             </a>
           </Button>
           <Button variant="ghost" size="icon" asChild>
-            <a href="mailto:example@email.com">
+            <a href="mailto:varma.sushma1998@gmail.com">
               <Mail className="h-5 w-5" />
             </a>
           </Button>
