@@ -72,7 +72,20 @@ const Index = () => {
 
       <main className="pt-16 md:pl-72">
         <div className="container py-8 space-y-16">
-          <section id="about" className="section-scroll">
+          {/* Hero Section */}
+          <section className="min-h-[60vh] flex flex-col justify-center animate-fade-in">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 animate-slide-in-right">
+              John Doe
+            </h1>
+            <h2 className="text-2xl md:text-3xl text-muted-foreground mb-6 animate-slide-in-right" style={{ animationDelay: "200ms" }}>
+              Software Developer
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-lg animate-slide-in-right" style={{ animationDelay: "400ms" }}>
+              Building digital experiences with passion and precision.
+            </p>
+          </section>
+
+          <section id="about" className="section-scroll animate-fade-in">
             <h2 className="text-2xl font-bold mb-4">About Me</h2>
             <p className="text-muted-foreground">
               I'm a passionate software developer with expertise in building scalable web applications.
@@ -81,11 +94,11 @@ const Index = () => {
             </p>
           </section>
 
-          <section id="education" className="section-scroll">
+          <section id="education" className="section-scroll animate-fade-in">
             <h2 className="text-2xl font-bold mb-4">Education</h2>
             <div className="grid gap-4">
               {educationData.map((edu, index) => (
-                <Card key={index} className="p-6 group hover:shadow-lg transition-shadow">
+                <Card key={index} className="p-6 group hover:shadow-lg transition-shadow animate-fade-in" style={{ animationDelay: `${index * 200}ms` }}>
                   <h3 className="font-bold">{edu.degree}</h3>
                   <p className="text-muted-foreground">{edu.school}</p>
                   <p className="text-sm text-muted-foreground">{edu.year}</p>
@@ -102,15 +115,15 @@ const Index = () => {
             </div>
           </section>
 
-          <section id="skills" className="section-scroll">
+          <section id="skills" className="section-scroll animate-fade-in">
             <h2 className="text-2xl font-bold mb-4">Skills</h2>
             <div className="grid gap-6 md:grid-cols-2">
-              {Object.entries(skillsData).map(([category, skills]) => (
-                <Card key={category} className="p-6">
+              {Object.entries(skillsData).map(([category, skills], index) => (
+                <Card key={category} className="p-6 animate-fade-in" style={{ animationDelay: `${index * 200}ms` }}>
                   <h3 className="font-bold mb-4">{category}</h3>
                   <div className="flex flex-wrap gap-2">
                     {skills.map((skill, index) => (
-                      <Badge key={index} variant="secondary">
+                      <Badge key={index} variant="secondary" className="hover:scale-105 transition-transform">
                         {skill}
                       </Badge>
                     ))}
@@ -120,11 +133,11 @@ const Index = () => {
             </div>
           </section>
 
-          <section id="experience" className="section-scroll">
+          <section id="experience" className="section-scroll animate-fade-in">
             <h2 className="text-2xl font-bold mb-4">Experience</h2>
             <div className="space-y-8">
               {experienceData.map((exp, index) => (
-                <div key={index} className="grid grid-cols-[1fr,3fr] gap-4">
+                <div key={index} className="grid grid-cols-[1fr,3fr] gap-4 animate-fade-in" style={{ animationDelay: `${index * 200}ms` }}>
                   <div className="text-sm text-muted-foreground">{exp.dates}</div>
                   <div>
                     <h3 className="font-bold">{exp.role}</h3>
@@ -141,11 +154,11 @@ const Index = () => {
             </div>
           </section>
 
-          <section id="projects" className="section-scroll">
+          <section id="projects" className="section-scroll animate-fade-in">
             <h2 className="text-2xl font-bold mb-4">Projects</h2>
             <div className="grid gap-6 md:grid-cols-2">
               {projectsData.map((project, index) => (
-                <Card key={index} className="overflow-hidden">
+                <Card key={index} className="overflow-hidden hover:scale-105 transition-transform animate-fade-in" style={{ animationDelay: `${index * 200}ms` }}>
                   <img
                     src={project.image}
                     alt={project.title}
