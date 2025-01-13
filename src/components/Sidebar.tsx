@@ -29,9 +29,16 @@ export function Sidebar({ activeSection, setActiveSection }) {
           {sections.map((section) => (
             <Button
               key={section.id}
-              variant="ghost"
-              className="w-full justify-start"
-              onClick={() => scrollToSection(section.id)}
+              variant={activeSection === section.id ? "secondary" : "ghost"}
+              className={`w-full justify-start transition-colors ${
+                activeSection === section.id
+                  ? "bg-accent text-accent-foreground"
+                  : ""
+              }`}
+              onClick={() => {
+                scrollToSection(section.id);
+                setActiveSection(section.id);
+              }}
             >
               {section.label}
             </Button>
