@@ -32,8 +32,8 @@ const Index = () => {
           });
         },
         {
-          threshold: 0.5, // Trigger when 50% of the section is visible
-          rootMargin: "-10% 0px -90% 0px", // Adjust margins to better detect the active section
+          // threshold: 0.5, // Trigger when 50% of the section is visible
+          rootMargin: "-50% 0px -50% 0px", // Adjust margins to better detect the active section
         }
       );
 
@@ -66,7 +66,10 @@ const Index = () => {
         </div>
       </header>
 
-      <Sidebar activeSection={activeSection} setActiveSection={scrollToSection} />
+      <Sidebar
+        activeSection={activeSection}
+        setActiveSection={scrollToSection}
+      />
 
       <main className="md:pl-72">
         <div className="container py-8 space-y-16">
