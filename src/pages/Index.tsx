@@ -6,7 +6,7 @@ import HomeMobile from "@/components/sections/HomeMobile";
 import Projects from "@/components/sections/Projects";
 import Skills from "@/components/sections/Skills";
 import { Sidebar } from "@/components/Sidebar";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState("about");
@@ -20,14 +20,43 @@ const Index = () => {
     projects: useRef<HTMLElement>(null),
   };
 
+  useEffect(() => {
+    const observers = Object.entries(sectionRefs).map(([id, ref]) => {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              console.log("Section in view:", id);
+              setActiveSection(id);
+            }
+          });
+        },
+        {
+          rootMargin: "-50% 0px -50% 0px", // Trigger when section is in the middle of viewport
+        }
+      );
+
+      if (ref.current) {
+        observer.observe(ref.current);
+      }
+
+      return observer;
+    });
+
+    // Cleanup observers on unmount
+    return () => {
+      observers.forEach((observer) => observer.disconnect());
+    };
+  }, []);
+
   const scrollToSection = (section: string) => {
-    console.log(section);
+    console.log("Scrolling to section:", section);
     sectionRefs[section as keyof typeof sectionRefs].current?.scrollIntoView({
       behavior: "smooth",
     });
-    console.log(activeSection, section);
     setActiveSection(section);
   };
+
   return (
     <div className="min-h-screen">
       <header className="fixed top-0 left-0 right-0 h-16 border-b bg-background/80 backdrop-blur-sm md:pl-72 z-50 md:hidden">
@@ -36,10 +65,7 @@ const Index = () => {
         </div>
       </header>
 
-      <Sidebar
-        activeSection={activeSection}
-        setActiveSection={scrollToSection}
-      />
+      <Sidebar activeSection={activeSection} setActiveSection={scrollToSection} />
 
       <main className="md:pl-72">
         <div className="container py-8 space-y-16">
@@ -48,7 +74,7 @@ const Index = () => {
           <Education ref={sectionRefs.education} />
           <Skills ref={sectionRefs.skills} />
           <Experience ref={sectionRefs.experience} />
-          <Projects />
+          <Projects ref={sectionRefs.projects} />
         </div>
       </main>
     </div>
