@@ -32,7 +32,8 @@ const Index = () => {
           });
         },
         {
-          rootMargin: "-50% 0px -50% 0px", // Trigger when section is in the middle of viewport
+          threshold: 0.5, // Trigger when 50% of the section is visible
+          rootMargin: "-10% 0px -90% 0px", // Adjust margins to better detect the active section
         }
       );
 
