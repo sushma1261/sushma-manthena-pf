@@ -29,7 +29,7 @@ export function Sidebar({ activeSection, setActiveSection }) {
           {sections.map((section) => (
             <Button
               key={section.id}
-              variant={activeSection === section.id ? "secondary" : "ghost"}
+              variant={"ghost"}
               className={`w-full justify-start transition-colors ${
                 activeSection === section.id
                   ? "bg-accent text-accent-foreground"

@@ -1,10 +1,11 @@
-import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { Menu } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
 
 const sections = [
@@ -30,21 +31,23 @@ export function MobileNav() {
           <Menu className="h-5 w-5" />
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="w-72">
-        <nav className="flex flex-col gap-4">
-          {sections.map((section) => (
-            <Button
-              key={section.id}
-              variant="ghost"
-              className="justify-start"
-              onClick={() => scrollToSection(section.id)}
-            >
-              {section.label}
-            </Button>
-          ))}
-          <ThemeToggle />
-        </nav>
-      </SheetContent>
+      <SheetClose>
+        <SheetContent side="left" className="w-72">
+          <nav className="flex flex-col gap-4">
+            {sections.map((section) => (
+              <Button
+                key={section.id}
+                variant="ghost"
+                className="justify-start"
+                onClick={() => scrollToSection(section.id)}
+              >
+                {section.label}
+              </Button>
+            ))}
+            <ThemeToggle />
+          </nav>
+        </SheetContent>
+      </SheetClose>
     </Sheet>
   );
 }

@@ -1,14 +1,14 @@
 import { projectsData } from "@/lib/data";
 import { SquareTerminal } from "lucide-react";
+import { forwardRef } from "react";
 import { Badge } from "../ui/badge";
 import { Card } from "../ui/card";
-import { forwardRef } from "react";
 
 const Projects = forwardRef<HTMLElement>((props, ref) => {
   const handleClick = (link: string) => {
     if (link) window.location.href = link;
   };
-  
+
   return (
     <section ref={ref} id="projects" className="section-scroll animate-fade-in">
       <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
@@ -47,7 +47,4 @@ const Projects = forwardRef<HTMLElement>((props, ref) => {
     </section>
   );
 });
-
-Projects.displayName = "Projects";
-
 export default Projects;

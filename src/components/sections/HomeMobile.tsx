@@ -5,17 +5,11 @@ const HomeMobile = () => {
         Sushma Manthena
       </h1>
       <h2
-        className="text-2xl md:text-3xl text-muted-foreground mb-6 animate-slide-in-right"
+        className="text-2xl md:text-3xl text-accent mb-6 animate-slide-in-right"
         style={{ animationDelay: "200ms" }}
       >
         Software Developer
       </h2>
-      <p
-        className="text-lg text-muted-foreground max-w-lg animate-slide-in-right"
-        style={{ animationDelay: "400ms" }}
-      >
-        Building digital experiences with passion and precision.
-      </p>
     </section>
   );
 };
