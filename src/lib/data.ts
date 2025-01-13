@@ -1,5 +1,5 @@
+import AquaIOT from "./aquaiot.jpeg";
 import Interview from "./interview.jpeg";
-
 import VQuest from "./vquest.jpeg";
 
 export const educationData = [
@@ -134,5 +134,13 @@ export const projectsData = [
     skills: ["iOS", "SwiftUI", "Gemini AI", "GenAI"],
     image: Interview,
     link: "https://github.com/sushma1261/MockItUp",
+  },
+  {
+    title: "Real Time Aqua Pond Management System ",
+    description:
+      "an IoT project with an Android app to monitor aqua farms, providing farmers with actionable insights to improve farm management.",
+    skills: ["IOT", "Android"],
+    link: "",
+    image: AquaIOT,
   },
 ];
