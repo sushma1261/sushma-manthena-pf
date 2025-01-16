@@ -27,6 +27,12 @@ const Projects = forwardRef<HTMLElement>((props, ref) => {
     return () => observer.disconnect();
   }, []);
 
+  const handleClick = (link: string) => {
+    if (link) {
+      window.open(link, '_blank');
+    }
+  };
+
   return (
     <section ref={ref} id="projects" className="section-scroll">
       <div className="opacity-0" ref={contentRef}>
@@ -67,4 +73,5 @@ const Projects = forwardRef<HTMLElement>((props, ref) => {
     </section>
   );
 });
+
 export default Projects;
