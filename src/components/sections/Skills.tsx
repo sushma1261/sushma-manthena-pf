@@ -2,11 +2,34 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { skillsData } from "@/lib/data";
 import { Wrench } from "lucide-react";
-import { forwardRef } from "react";
+import { forwardRef, useEffect, useRef } from "react";
+
 const Skills = forwardRef<HTMLElement>((props, ref) => {
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-fadeIn");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (contentRef.current) {
+      observer.observe(contentRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section ref={ref} id="skills">
-      <div className="section-scroll animate-fade-in">
+      <div className="section-scroll opacity-0" ref={contentRef}>
         <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
           <Wrench className="h-6 w-6" />
           Skills

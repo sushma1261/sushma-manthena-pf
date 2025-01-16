@@ -1,10 +1,32 @@
 import { User } from "lucide-react";
-import { forwardRef } from "react";
+import { forwardRef, useEffect, useRef } from "react";
 
 const AboutMe = forwardRef<HTMLElement>((props, ref) => {
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-fadeIn");
+            observer.unobserve(entry.target); // Only animate once
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (contentRef.current) {
+      observer.observe(contentRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section ref={ref} id="about">
-      <div className="section-scroll animate-fade-in">
+      <div className="section-scroll opacity-0" ref={contentRef}>
         <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
           <User className="h-6 w-6" />
           About

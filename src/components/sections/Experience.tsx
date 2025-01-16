@@ -1,20 +1,39 @@
 import { experienceData } from "@/lib/data";
 import { BriefcaseBusiness } from "lucide-react";
-import { forwardRef } from "react";
+import { forwardRef, useEffect, useRef } from "react";
 
 const Experience = forwardRef<HTMLElement>((props, ref) => {
-  return (
-    <section
-      ref={ref}
-      id="experience"
-      className="section-scroll animate-fade-in"
-    >
-      <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-        <BriefcaseBusiness className="h-6 w-6" />
-        Experience
-      </h2>
+  const contentRef = useRef<HTMLDivElement>(null);
 
-      <div className="space-y-8">
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-fadeIn");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (contentRef.current) {
+      observer.observe(contentRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <section ref={ref} id="experience" className="section-scroll">
+      <div className="opacity-0" ref={contentRef}>
+        <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+          <BriefcaseBusiness className="h-6 w-6" />
+          Experience
+        </h2>
+
+        <div className="space-y-8">
         {experienceData.map((exp, index) => (
           <div
             key={index}
@@ -53,6 +72,7 @@ const Experience = forwardRef<HTMLElement>((props, ref) => {
             </div>
           </div>
         ))}
+        </div>
       </div>
     </section>
   );
