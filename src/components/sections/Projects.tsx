@@ -29,7 +29,7 @@ const Projects = forwardRef<HTMLElement>((props, ref) => {
 
   const handleClick = (link: string) => {
     if (link) {
-      window.open(link, '_blank');
+      window.open(link, "_blank");
     }
   };
 
@@ -55,6 +55,11 @@ const Projects = forwardRef<HTMLElement>((props, ref) => {
               />
               <div className="p-6">
                 <h3 className="font-bold">{project.title}</h3>
+                {project.subtitle && (
+                  <span className="text-sm text-accent italic">
+                    {project.subtitle}
+                  </span>
+                )}
                 <p className="text-sm text-muted-foreground mt-2">
                   {project.description}
                 </p>

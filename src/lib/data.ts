@@ -121,23 +121,8 @@ export const experienceData = [
 
 export const projectsData = [
   {
-    title: "VQuest",
-    description:
-      "Developed a website for a college, enabling students to post academic doubts and receive answers from experts, enhancing student engagement and learning",
-    skills: ["ReactJS", "Firebase"],
-    link: "https://github.com/sushma1261/vquest",
-    image: VQuest,
-  },
-  {
-    title: "MockItUp",
-    description:
-      "Developed a mobile app for conducting mock interviews, featuring real-time feedback and personalized practice recommendations to enhance user performance.",
-    skills: ["iOS", "SwiftUI", "Gemini AI", "GenAI"],
-    image: Interview,
-    link: "https://github.com/sushma1261/MockItUp",
-  },
-  {
-    title: "CodeBridg: Connecting Coders, Building Bridges",
+    title: "CodeBridg",
+    subtitle: "In Progress",
     description:
       "Developing a collaborative platform for real-time chat, file sharing, and pair programming with seamless communication and code collaboration.",
     skills: [
@@ -152,8 +137,25 @@ export const projectsData = [
       "JUnit",
       "Jest",
     ],
-    link: "",
+    link: "https://github.com/sushma1261/projectSD-frontend",
     image: CodeBridge,
+  },
+  {
+    title: "MockItUp",
+    description:
+      "Developed a mobile app for conducting mock interviews, featuring real-time feedback and personalized practice recommendations to enhance user performance.",
+    skills: ["iOS", "SwiftUI", "Gemini AI", "GenAI"],
+    image: Interview,
+    link: "https://github.com/sushma1261/MockItUp",
+  },
+
+  {
+    title: "VQuest",
+    description:
+      "Developed a website for a college, enabling students to post academic doubts and receive answers from experts, enhancing student engagement and learning",
+    skills: ["ReactJS", "Firebase"],
+    link: "https://github.com/sushma1261/vquest",
+    image: VQuest,
   },
   {
     title: "Real Time Aqua Pond Management System ",
