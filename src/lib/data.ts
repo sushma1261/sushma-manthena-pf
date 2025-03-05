@@ -1,4 +1,5 @@
 import AquaIOT from "./aquaiot.jpeg";
+import CodeBridge from "./colab.jpeg";
 import Interview from "./interview.jpeg";
 import VQuest from "./vquest.jpeg";
 
@@ -134,6 +135,25 @@ export const projectsData = [
     skills: ["iOS", "SwiftUI", "Gemini AI", "GenAI"],
     image: Interview,
     link: "https://github.com/sushma1261/MockItUp",
+  },
+  {
+    title: "CodeBridg: Connecting Coders, Building Bridges",
+    description:
+      "Developing a collaborative platform for real-time chat, file sharing, and pair programming with seamless communication and code collaboration.",
+    skills: [
+      "Next.js",
+      "ReactJS",
+      "TypeScript",
+      "Java",
+      "Spring Boot",
+      "MySQL",
+      "Postgres",
+      "Redis",
+      "JUnit",
+      "Jest",
+    ],
+    link: "",
+    image: CodeBridge,
   },
   {
     title: "Real Time Aqua Pond Management System ",
