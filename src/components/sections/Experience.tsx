@@ -1,3 +1,4 @@
+
 import { experienceData } from "@/lib/data";
 import { BriefcaseBusiness } from "lucide-react";
 import { forwardRef, useEffect, useRef } from "react";
@@ -41,19 +42,19 @@ const Experience = forwardRef<HTMLElement>((props, ref) => {
             style={{ animationDelay: `${index * 200}ms` }}
           >
             <div className="text-sm text-muted-foreground">{exp.dates}</div>
-            <div>
+            <div className="bg-muted/30 rounded-lg p-4 border border-border shadow-sm">
               <h3 className="font-bold">{exp.role}</h3>
               <p className="text-muted-foreground">{exp.company}</p>
               <p className="text-sm font-medium">{exp.project}</p>
               {exp.responsibilities && (
-                <ul className="list-disc list-inside text-sm text-muted-foreground">
+                <ul className="list-disc list-inside text-sm text-muted-foreground mt-2">
                   {exp.responsibilities.map((resp, i) => (
                     <li key={i}>{resp}</li>
                   ))}
                 </ul>
               )}
               {exp.projects && (
-                <ul className="list-disc list-inside text-sm text-muted-foreground">
+                <ul className="list-disc list-inside text-sm text-muted-foreground mt-2">
                   {Object.keys(exp.projects).map((project, i) => (
                     <ul
                       className="list-disc list-inside text-sm text-muted-foreground"
