@@ -8,7 +8,7 @@ enum Theme {
 }
 
 export function ThemeToggle() {
-  const [theme, setTheme] = useState(Theme.DARK);
+  const [theme, setTheme] = useState(Theme.LIGHT);
 
   useEffect(() => {
     if (theme == Theme.DARK) {
