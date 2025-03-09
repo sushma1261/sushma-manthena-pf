@@ -1,8 +1,7 @@
-
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { experienceData } from "@/lib/data";
 import { BriefcaseBusiness } from "lucide-react";
 import { forwardRef, useEffect, useRef } from "react";
-import { Card, CardHeader, CardContent } from "@/components/ui/card";
 
 const Experience = forwardRef<HTMLElement>((props, ref) => {
   const contentRef = useRef<HTMLDivElement>(null);
@@ -48,13 +47,15 @@ const Experience = forwardRef<HTMLElement>((props, ref) => {
                     <h3 className="font-bold text-lg">{exp.role}</h3>
                     <p className="text-muted-foreground">{exp.company}</p>
                   </div>
-                  <p className="text-sm text-muted-foreground mt-1 md:mt-0">{exp.dates}</p>
+                  <p className="text-sm text-muted-foreground mt-1 md:mt-0">
+                    {exp.dates}
+                  </p>
                 </div>
                 <p className="text-sm font-medium mt-1">{exp.project}</p>
               </CardHeader>
-              
+
               <CardContent>
-                <h4 className="text-sm font-semibold mb-2">Responsibilities</h4>
+                {/* <h4 className="text-sm font-semibold mb-2">Responsibilities</h4> */}
                 {exp.responsibilities && (
                   <ul className="list-disc list-inside text-sm text-muted-foreground">
                     {exp.responsibilities.map((resp, i) => (
@@ -64,7 +65,6 @@ const Experience = forwardRef<HTMLElement>((props, ref) => {
                 )}
                 {exp.projects && (
                   <>
-                    <h4 className="text-sm font-semibold mt-4 mb-2">Projects</h4>
                     <ul className="list-disc list-inside text-sm text-muted-foreground">
                       {Object.keys(exp.projects).map((project, i) => (
                         <ul
