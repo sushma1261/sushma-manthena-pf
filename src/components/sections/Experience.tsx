@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { experienceData } from "@/lib/data";
-import { BriefcaseBusiness } from "lucide-react";
+import { BriefcaseBusiness, CalendarRangeIcon } from "lucide-react";
 import { forwardRef, useEffect, useRef } from "react";
 
 const Experience = forwardRef<HTMLElement>((props, ref) => {
@@ -47,9 +47,12 @@ const Experience = forwardRef<HTMLElement>((props, ref) => {
                     <h3 className="font-bold text-lg">{exp.role}</h3>
                     <p className="text-muted-foreground">{exp.company}</p>
                   </div>
-                  <p className="text-sm text-muted-foreground mt-1 md:mt-0">
-                    {exp.dates}
-                  </p>
+                  <div className="flex items-center gap-2">
+                    <CalendarRangeIcon className="h-4 w-4 text-muted-foreground" />
+                    <span className="text-sm text-muted-foreground">
+                      {exp.dates}
+                    </span>
+                  </div>
                 </div>
                 <p className="text-sm font-medium mt-1">{exp.project}</p>
               </CardHeader>
