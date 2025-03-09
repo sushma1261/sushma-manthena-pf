@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Mail } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
+import Typewriter from "./TypeWriter";
 
 const sections = [
   { id: "about", label: "About" },
@@ -8,6 +9,20 @@ const sections = [
   { id: "skills", label: "Skills" },
   { id: "experience", label: "Experience" },
   { id: "projects", label: "Projects" },
+];
+
+const strings = [
+  "Software Developer!",
+  "A Problem Solver!",
+  "A Team Player!",
+  "A Frontend Developer!",
+  "A React Developer!",
+  "A Fast Learner!",
+  "A Tech Enthusiast!",
+  "A Web Developer!",
+  "A JavaScript Developer!",
+  "A full-stack developer!",
+  "A Tech Geek!",
 ];
 
 export function Sidebar({ activeSection, setActiveSection }) {
@@ -23,7 +38,8 @@ export function Sidebar({ activeSection, setActiveSection }) {
       <div className="space-y-8">
         <div className="mt-8">
           <h1 className="text-2xl font-bold">Sushma Manthena</h1>
-          <p className="text-muted-foreground">Software Developer</p>
+          <Typewriter strings={strings} isAnimating={true} />
+          {/* <p className="text-muted-foreground">Software Developer</p> */}
         </div>
         <nav className="space-y-2">
           {sections.map((section) => (
