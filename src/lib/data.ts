@@ -1,8 +1,8 @@
 import AquaIOT from "./aquaiot.jpeg";
 import CodeBridge from "./colab.jpeg";
 import Interview from "./interview.jpeg";
+import Luna from "./luna.png";
 import VQuest from "./vquest.jpeg";
-
 export const educationData = [
   {
     school: "University of Washington",
@@ -120,6 +120,15 @@ export const experienceData = [
 ];
 
 export const projectsData = [
+  {
+    title: "Luna mHealth App",
+    subtitle: "In Progress",
+    description:
+      "Developing an offline-first mobile app that provides multilingual, audio-enabled health education content to underserved communities with limited internet access.",
+    skills: ["Flutter", "Dart", "Mockito"],
+    link: "",
+    image: Luna,
+  },
   {
     title: "CodeBridg",
     subtitle: "In Progress",
