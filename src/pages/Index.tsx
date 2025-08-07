@@ -77,8 +77,8 @@ const Index = () => {
           <AboutMe ref={sectionRefs.about} />
           <Education ref={sectionRefs.education} />
           <Skills ref={sectionRefs.skills} />
-          <Projects ref={sectionRefs.projects} />
           <Experience ref={sectionRefs.experience} />
+          <Projects ref={sectionRefs.projects} />
         </div>
       </main>
     </div>
