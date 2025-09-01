@@ -130,8 +130,23 @@ export const projectsData = [
     image: Luna,
   },
   {
-    title: "CodeBridg",
+    title: "MockItUp",
     subtitle: "In Progress",
+    description:
+      "Developed an app for conducting mock interviews, featuring real-time feedback and personalized practice recommendations to enhance user performance.",
+    skills: [
+      "Node.js",
+      "Next.js",
+      "ReactJS",
+      "TailwindCSS",
+      "Typescript",
+      "GenAI",
+    ],
+    image: Interview,
+    link: "https://github.com/sushma1261/MockInterview",
+  },
+  {
+    title: "CodeBridg",
     description:
       "Developing a collaborative platform for real-time chat, file sharing, and pair programming with seamless communication and code collaboration.",
     skills: [
@@ -148,14 +163,6 @@ export const projectsData = [
     ],
     link: "https://github.com/sushma1261/projectSD-frontend",
     image: CodeBridge,
-  },
-  {
-    title: "MockItUp",
-    description:
-      "Developed a mobile app for conducting mock interviews, featuring real-time feedback and personalized practice recommendations to enhance user performance.",
-    skills: ["iOS", "SwiftUI", "Gemini AI", "GenAI"],
-    image: Interview,
-    link: "https://github.com/sushma1261/MockItUp",
   },
 
   {
