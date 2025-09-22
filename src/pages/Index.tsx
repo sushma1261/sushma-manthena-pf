@@ -6,19 +6,28 @@ import HomeMobile from "@/components/sections/HomeMobile";
 import Projects from "@/components/sections/Projects";
 import Skills from "@/components/sections/Skills";
 import { Sidebar } from "@/components/Sidebar";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState("about");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const sectionRefs = {
-    about: useRef<HTMLElement>(null),
-    education: useRef<HTMLElement>(null),
-    skills: useRef<HTMLElement>(null),
-    experience: useRef<HTMLElement>(null),
-    projects: useRef<HTMLElement>(null),
-  };
+  const aboutRef = useRef<HTMLElement>(null);
+  const educationRef = useRef<HTMLElement>(null);
+  const skillsRef = useRef<HTMLElement>(null);
+  const experienceRef = useRef<HTMLElement>(null);
+  const projectsRef = useRef<HTMLElement>(null);
+
+  const sectionRefs = useMemo(
+    () => ({
+      about: aboutRef,
+      education: educationRef,
+      skills: skillsRef,
+      experience: experienceRef,
+      projects: projectsRef,
+    }),
+    [aboutRef, educationRef, skillsRef, experienceRef, projectsRef]
+  );
 
   useEffect(() => {
     const observers = Object.entries(sectionRefs).map(([id, ref]) => {
@@ -48,7 +57,7 @@ const Index = () => {
     return () => {
       observers.forEach((observer) => observer.disconnect());
     };
-  }, []);
+  }, [sectionRefs]);
 
   const scrollToSection = (section: string) => {
     console.log("Scrolling to section:", section);
