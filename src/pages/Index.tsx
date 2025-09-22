@@ -72,7 +72,7 @@ const Index = () => {
       />
 
       <main className="md:pl-72">
-        <div className="container py-8 space-y-16">
+        <div className="container py-8 space-y-8">
           <HomeMobile />
           <AboutMe ref={sectionRefs.about} />
           <Education ref={sectionRefs.education} />

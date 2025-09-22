@@ -1,5 +1,4 @@
 import AquaIOT from "./aquaiot.jpeg";
-import CodeBridge from "./colab.jpeg";
 import Interview from "./interview.jpeg";
 import Luna from "./luna.png";
 import VQuest from "./vquest.jpeg";
@@ -15,7 +14,7 @@ export const educationData = [
       "Research Methods in Software Development",
       "High Performance Computing",
     ],
-    cgpa: "4/4",
+    cgpa: "3.85/4",
   },
   {
     school: "Shri Vishnu Engineering College for Women(A)",
@@ -43,18 +42,27 @@ export const skillsData = {
     "Python",
     "Swift",
   ],
-  "Frontend Technologies": ["ReactJS", "ReactNative", "HTML", "CSS", "Next.js"],
-  "Backend Technologies": ["Node.js", "Express", "NestJS", "GraphQL"],
-  Databases: ["MySQL", "MongoDB", "Firebase", "Redis"],
+  "Frontend Technologies": [
+    "ReactJS",
+    "ReactNative",
+    "HTML",
+    "CSS",
+    "Next.js",
+    "Node.js",
+    "TailwindCSS",
+  ],
+  Databases: ["MySQL", "MongoDB", "Firebase", "Redis", "GraphQL"],
   "DevOps & Tools": [
     "Git",
     "Docker",
     "Kubernetes",
     "Jenkins",
-    "Github",
+    "GitHub",
     "Postman",
     "Figma",
   ],
+
+  "Operating Systems": ["MacOS", "Windows", "Linux"],
   "Build Automation Tools": [
     "Jenkins",
     "Maven",
@@ -63,7 +71,6 @@ export const skillsData = {
     "Vite",
     "NPM",
   ],
-  "Operating Systems": ["MacOS", "Windows", "Linux"],
   "Other technologies and frameworks": [
     "IoT",
     "JUnit",
@@ -81,6 +88,8 @@ export const experienceData = [
     role: "UI Engineer",
     company: "Flipkart",
     project: "Video Commerce",
+    summary:
+      "Built Video Commerce UI with React Native, integrated reward APIs, and improved user engagement through interactive video features.",
     responsibilities: [
       "Developed the Video Commerce UI using React Native to support live streaming and offer product discounts to users who engaged with the videos. Integrated reward management system APIs to allocate rewards based on user interactions, improving user retention and engagement.",
     ],
@@ -90,6 +99,8 @@ export const experienceData = [
     role: "Software Development Engineer",
     company: "Flipkart",
     project: "Chat Platform",
+    summary:
+      "Led development of Idiom tool, chat bots, and microservices migration to cloud, improving testing efficiency and deployment speed.",
     projects: {
       "Idiom and Dialog Manager": [
         "Developed Idiom from scratch, a conversational design tool using ReactJS and Java, enabling designers to define user flows and journeys, and improved its performance by 6 times.",
@@ -112,6 +123,8 @@ export const experienceData = [
     role: "Software Development Engineer",
     company: "Flipkart",
     project: "Shopsy",
+    summary:
+      "Developed earnings dashboard and integrated engagement tools, contributing to a successful app launch and better user insights.",
     responsibilities: [
       "Developed an earnings dashboard and various UI screens for the app’s initial launch in June 2021, contributing to a successful launch and providing users with valuable insights into their earnings",
       "Integrated App with branch.io for user engagement and Mo-engage for push notification and other analytic features.",
@@ -143,27 +156,27 @@ export const projectsData = [
       "GenAI",
     ],
     image: Interview,
-    link: "https://github.com/sushma1261/MockInterview",
+    link: "https://mock-interview-frontend-peach.vercel.app/",
   },
-  {
-    title: "CodeBridg",
-    description:
-      "Developing a collaborative platform for real-time chat, file sharing, and pair programming with seamless communication and code collaboration.",
-    skills: [
-      "Next.js",
-      "ReactJS",
-      "TypeScript",
-      "Java",
-      "Spring Boot",
-      "MySQL",
-      "Postgres",
-      "Redis",
-      "JUnit",
-      "Jest",
-    ],
-    link: "https://github.com/sushma1261/projectSD-frontend",
-    image: CodeBridge,
-  },
+  // {
+  //   title: "CodeBridg",
+  //   description:
+  //     "Developing a collaborative platform for real-time chat, file sharing, and pair programming with seamless communication and code collaboration.",
+  //   skills: [
+  //     "Next.js",
+  //     "ReactJS",
+  //     "TypeScript",
+  //     "Java",
+  //     "Spring Boot",
+  //     "MySQL",
+  //     "Postgres",
+  //     "Redis",
+  //     "JUnit",
+  //     "Jest",
+  //   ],
+  //   link: "https://github.com/sushma1261/projectSD-frontend",
+  //   image: CodeBridge,
+  // },
 
   {
     title: "VQuest",

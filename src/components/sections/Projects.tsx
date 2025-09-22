@@ -4,6 +4,36 @@ import { forwardRef, useEffect, useRef } from "react";
 import { Badge } from "../ui/badge";
 import { Card } from "../ui/card";
 
+// Import logos from react-icons
+import { GiArtificialIntelligence } from "react-icons/gi"; // for GenAI
+import {
+  SiAndroid,
+  SiArduino,
+  SiDart,
+  SiFirebase,
+  SiFlutter,
+  SiJunit5,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiReact,
+  SiTailwindcss,
+  SiTypescript,
+} from "react-icons/si";
+
+const skillIcons: Record<string, JSX.Element> = {
+  Flutter: <SiFlutter className="w-4 h-4" />,
+  Dart: <SiDart className="w-4 h-4" />,
+  Mockito: <SiJunit5 className="w-4 h-4" />,
+  "Node.js": <SiNodedotjs className="w-4 h-4" />,
+  "Next.js": <SiNextdotjs className="w-4 h-4" />,
+  ReactJS: <SiReact className="w-4 h-4" />,
+  TailwindCSS: <SiTailwindcss className="w-4 h-4" />,
+  Typescript: <SiTypescript className="w-4 h-4" />,
+  Firebase: <SiFirebase className="w-4 h-4" />,
+  Android: <SiAndroid className="w-4 h-4" />,
+  IOT: <SiArduino className="w-4 h-4" />,
+  GenAI: <GiArtificialIntelligence className="w-4 h-4" />,
+};
 const Projects = forwardRef<HTMLElement>((props, ref) => {
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -65,7 +95,12 @@ const Projects = forwardRef<HTMLElement>((props, ref) => {
                 </p>
                 <div className="flex flex-wrap gap-2 mt-4">
                   {project.skills.map((skill, i) => (
-                    <Badge key={i} variant="secondary">
+                    <Badge
+                      key={i}
+                      variant="secondary"
+                      className="flex items-center gap-1"
+                    >
+                      {skillIcons[skill] ?? null}
                       {skill}
                     </Badge>
                   ))}
