@@ -147,14 +147,7 @@ export const projectsData = [
     subtitle: "In Progress",
     description:
       "Developed an app for conducting mock interviews, featuring real-time feedback and personalized practice recommendations to enhance user performance.",
-    skills: [
-      "Node.js",
-      "Next.js",
-      "ReactJS",
-      "TailwindCSS",
-      "Typescript",
-      "GenAI",
-    ],
+    skills: ["Node.js", "Next.js", "GenAI", "TailwindCSS", "Typescript"],
     image: Interview,
     link: "https://mock-interview-frontend-peach.vercel.app/",
   },
