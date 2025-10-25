@@ -22,7 +22,7 @@ export const heroData = {
     "Building scalable web & mobile applications with React, AI, and cloud",
   ctas: [
     { label: "View Projects", href: "#projects" },
-    { label: "Download Resume", href: "/resume.pdf" },
+    { label: "See Resume", href: "/SushmaManthenaResume.pdf" },
     { label: "Contact Me", href: "#contact" },
   ],
 };
@@ -123,6 +123,7 @@ export const experienceData = [
     project: "Video Commerce",
     summary:
       "Built Video Commerce UI with React Native, integrated reward APIs, and improved user engagement through interactive video features.",
+    tech: ["React Native", "JavaScript", "REST APIs"],
     responsibilities: [
       "Developed the Video Commerce UI using React Native to support live streaming and offer product discounts to users who engaged with the videos. Integrated reward management system APIs to allocate rewards based on user interactions, improving user retention and engagement.",
     ],
@@ -134,6 +135,7 @@ export const experienceData = [
     project: "Chat Platform",
     summary:
       "Led development of Idiom tool, chat bots, and microservices migration to cloud, improving testing efficiency and deployment speed.",
+    tech: ["React", "Java", "SpringBoot", "AWS", "Microservices"],
     projects: {
       "Idiom and Dialog Manager": [
         "Developed Idiom from scratch, a conversational design tool using ReactJS and Java, enabling designers to define user flows and journeys, and improved its performance by 6 times.",
@@ -158,6 +160,7 @@ export const experienceData = [
     project: "Shopsy",
     summary:
       "Developed earnings dashboard and integrated engagement tools, contributing to a successful app launch and better user insights.",
+    tech: ["React Native", "JavaScript", "Analytics"],
     responsibilities: [
       "Developed an earnings dashboard and various UI screens for the app’s initial launch in June 2021, contributing to a successful launch and providing users with valuable insights into their earnings",
       "Integrated App with branch.io for user engagement and Mo-engage for push notification and other analytic features.",

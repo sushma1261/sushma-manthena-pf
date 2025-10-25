@@ -6,6 +6,7 @@ import { forwardRef, useEffect, useRef, useState } from "react";
 const Experience = forwardRef<HTMLElement>((props, ref) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const contentRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const cardRefs = useRef<Array<HTMLDivElement | null>>([]);
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
   const [reduceMotion, setReduceMotion] = useState(false);
 
@@ -42,6 +43,23 @@ const Experience = forwardRef<HTMLElement>((props, ref) => {
 
   const toggle = (i: number) => {
     setExpandedIndex((prev) => (prev === i ? null : i));
+
+    // Scroll expanded card into view with offset for fixed nav
+    if (expandedIndex !== i) {
+      setTimeout(() => {
+        const card = cardRefs.current[i];
+        if (card) {
+          const offset = 100; // Account for fixed nav
+          const elementPosition = card.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
+          });
+        }
+      }, 100);
+    }
   };
 
   useEffect(() => {
@@ -107,20 +125,42 @@ const Experience = forwardRef<HTMLElement>((props, ref) => {
                 ? "md:pr-8 md:pl-0 md:mr-auto"
                 : "md:pl-8 md:pr-0 md:ml-auto";
 
+              // Extract year from dates for timeline display
+              // const year =
+              //   exp.dates.split("-")[0].trim().split(" ")[1] ||
+              //   exp.dates.split("-")[0].trim();
+
               return (
-                <div key={index} className="relative">
-                  <div className="absolute left-1/2 top-2 md:top-6 transform -translate-x-1/2">
-                    <span
-                      className="block h-3 w-3 rounded-full bg-teal-600 ring-4 ring-background"
-                      aria-hidden="true"
-                    />
+                <div
+                  key={index}
+                  className="relative animate-fade-in"
+                  style={{ animationDelay: `${index * 150}ms` }}
+                  ref={(el) => (cardRefs.current[index] = el)}
+                >
+                  {/* Timeline dot with year label and pulse animation - hidden on mobile */}
+                  <div className="hidden md:block absolute left-1/2 top-2 md:top-6 transform -translate-x-1/2 group">
+                    <div className="relative">
+                      <span
+                        className="block h-3 w-3 rounded-full bg-teal-600 ring-4 ring-background transition-all duration-300 group-hover:ring-8 group-hover:ring-teal-600/20"
+                        aria-hidden="true"
+                      />
+                      {/* Pulse animation on hover */}
+                      <span
+                        className="absolute inset-0 rounded-full bg-teal-600 opacity-0 group-hover:animate-ping"
+                        aria-hidden="true"
+                      />
+                    </div>
+                    {/* Year label on desktop
+                    <span className="hidden md:block absolute top-0 left-6 text-xs font-medium text-muted-foreground whitespace-nowrap bg-background px-2 py-1 rounded">
+                      {year}
+                    </span> */}
                   </div>
 
-                  <div className={`md:w-1/2 ${sideClasses}`}>
+                  <div className={`w-full md:w-1/2 ${sideClasses}`}>
                     <Card
                       className={`transition-transform duration-200 ease-in-out hover:scale-[1.02] ${
                         expandedIndex === index ? "ring-2 ring-primary" : ""
-                      }`}
+                      } border-l-4 md:border-l-0 border-teal-600/40`}
                     >
                       <CardHeader className="pb-2">
                         <div className="flex items-start justify-between gap-4">
@@ -160,6 +200,20 @@ const Experience = forwardRef<HTMLElement>((props, ref) => {
                         <p className="text-sm text-muted-foreground mt-2 line-clamp-4">
                           {exp.summary}
                         </p>
+
+                        {/* Tech tags visible in collapsed state */}
+                        {exp.tech && (
+                          <div className="flex flex-wrap gap-2 mt-3">
+                            {exp.tech.map((tech, i) => (
+                              <span
+                                key={i}
+                                className="text-xs px-2 py-1 bg-teal-600/10 text-teal-600 dark:bg-teal-600/20 dark:text-teal-400 rounded-md font-medium"
+                              >
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
+                        )}
                       </CardHeader>
 
                       <div

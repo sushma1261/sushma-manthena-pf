@@ -38,7 +38,7 @@ const Hero: React.FC = () => {
               href={cta.href}
               onClick={(e) => handleCTAClick(e, cta.href)}
               className={`px-8 py-3 rounded-lg font-medium transition-all ${
-                cta.label === "Download Resume"
+                cta.label === "See Resume"
                   ? "bg-teal-600 text-white hover:bg-teal-700 shadow-lg hover:shadow-xl"
                   : "border-2 border-gray-300 dark:border-gray-600 hover:border-teal-600 dark:hover:border-teal-500"
               }`}
