@@ -1,7 +1,40 @@
 import AquaIOT from "./aquaiot.jpeg";
-import Interview from "./interview.jpeg";
-import Luna from "./luna.png";
+import CodeBridge from "./codebridg.png";
+import interview from "./interview.jpeg";
 import VQuest from "./vquest.jpeg";
+
+export const siteMetadata = {
+  title: "Sushma Manthena | Full Stack Developer",
+  description:
+    "Full Stack Developer with 4+ years at Flipkart. Expert in React, React Native, AI solutions, and scalable web applications.",
+  openGraph: {
+    title: "Sushma Manthena - Full Stack Developer",
+    description:
+      "Building scalable web & mobile applications with React, AI, and cloud",
+    images: ["/og-image.svg"],
+  },
+};
+
+export const heroData = {
+  name: "Sushma Manthena",
+  headline: "Full Stack Developer | AI Solutions | 4+ Years at Flipkart",
+  tagline:
+    "Building scalable web & mobile applications with React, AI, and cloud",
+  ctas: [
+    { label: "View Projects", href: "#projects" },
+    { label: "Download Resume", href: "/resume.pdf" },
+    { label: "Contact Me", href: "#contact" },
+  ],
+};
+
+export const contactData = {
+  email: "varma.sushma1998@gmail.com",
+  phone: "+1 206-696-6916",
+  linkedin: "https://linkedin.com/in/sushma-varma",
+  github: "https://github.com/sushma-manthena",
+  location: "Seattle, WA",
+};
+
 export const educationData = [
   {
     school: "University of Washington",
@@ -134,49 +167,57 @@ export const experienceData = [
 
 export const projectsData = [
   {
+    title: "iHyre",
+    subtitle: "AI Interview Platform",
+    description:
+      "An AI-powered interview platform that orchestrates LLM-driven interview agents, record/review flows and provides scoring and feedback to candidates.",
+    skills: ["Node.js", "GenAI", "ReactJS", "Typescript"],
+    demo: "https://mock-interview-frontend-peach.vercel.app/",
+    github: "https://github.com/sushma-manthena/MockItUp",
+    metrics: ["5x hiring throughput"],
+    image: interview,
+  },
+  {
     title: "Luna mHealth App",
     subtitle: "In Progress",
     description:
       "Developing an offline-first mobile app that provides multilingual, audio-enabled health education content to underserved communities with limited internet access.",
     skills: ["Flutter", "Dart", "Mockito"],
-    link: "",
-    image: Luna,
+    demo: "",
+    imageWebp: "/images/luna.webp",
+    imageFallback: "/images/luna.svg",
+    imageSrcSet: [
+      { src: "/images/luna-1200.webp", width: 1200 },
+      { src: "/images/luna-800.webp", width: 800 },
+      { src: "/images/luna-480.webp", width: 480 },
+    ],
   },
   {
-    title: "MockItUp",
-    subtitle: "In Progress",
+    title: "CodeBridg",
     description:
-      "Developed an app for conducting mock interviews, featuring real-time feedback and personalized practice recommendations to enhance user performance.",
-    skills: ["Node.js", "Next.js", "GenAI", "TailwindCSS", "Typescript"],
-    image: Interview,
-    link: "https://mock-interview-frontend-peach.vercel.app/",
+      "Developing a collaborative platform for real-time chat, file sharing, and pair programming with seamless communication and code collaboration.",
+    skills: [
+      "Next.js",
+      "ReactJS",
+      "TypeScript",
+      "Java",
+      "Spring Boot",
+      "MySQL",
+      "Postgres",
+      "Redis",
+      "JUnit",
+      "Jest",
+    ],
+    github: "https://github.com/sushma1261/projectSD-frontend",
+    image: CodeBridge,
   },
-  // {
-  //   title: "CodeBridg",
-  //   description:
-  //     "Developing a collaborative platform for real-time chat, file sharing, and pair programming with seamless communication and code collaboration.",
-  //   skills: [
-  //     "Next.js",
-  //     "ReactJS",
-  //     "TypeScript",
-  //     "Java",
-  //     "Spring Boot",
-  //     "MySQL",
-  //     "Postgres",
-  //     "Redis",
-  //     "JUnit",
-  //     "Jest",
-  //   ],
-  //   link: "https://github.com/sushma1261/projectSD-frontend",
-  //   image: CodeBridge,
-  // },
 
   {
     title: "VQuest",
     description:
       "Developed a website for a college, enabling students to post academic doubts and receive answers from experts, enhancing student engagement and learning",
     skills: ["ReactJS", "Firebase"],
-    link: "https://github.com/sushma1261/vquest",
+    github: "https://github.com/sushma1261/vquest",
     image: VQuest,
   },
   {

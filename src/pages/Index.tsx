@@ -1,32 +1,28 @@
 import { MobileNav } from "@/components/MobileNav";
-import AboutMe from "@/components/sections/AboutMe";
+import { TopNav } from "@/components/TopNav";
 import Education from "@/components/sections/Education";
 import Experience from "@/components/sections/Experience";
-import HomeMobile from "@/components/sections/HomeMobile";
+import Footer from "@/components/sections/Footer";
+import Hero from "@/components/sections/Hero";
+import Intro from "@/components/sections/Intro";
 import Projects from "@/components/sections/Projects";
-import Skills from "@/components/sections/Skills";
-import { Sidebar } from "@/components/Sidebar";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 const Index = () => {
-  const [activeSection, setActiveSection] = useState("about");
+  const [activeSection, setActiveSection] = useState("experience");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const aboutRef = useRef<HTMLElement>(null);
-  const educationRef = useRef<HTMLElement>(null);
-  const skillsRef = useRef<HTMLElement>(null);
   const experienceRef = useRef<HTMLElement>(null);
+  const educationRef = useRef<HTMLElement>(null);
   const projectsRef = useRef<HTMLElement>(null);
 
   const sectionRefs = useMemo(
     () => ({
-      about: aboutRef,
-      education: educationRef,
-      skills: skillsRef,
       experience: experienceRef,
+      education: educationRef,
       projects: projectsRef,
     }),
-    [aboutRef, educationRef, skillsRef, experienceRef, projectsRef]
+    [experienceRef, educationRef, projectsRef]
   );
 
   useEffect(() => {
@@ -69,26 +65,25 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
-      <header className="fixed top-0 left-0 right-0 h-16 border-b bg-background/80 backdrop-blur-sm md:pl-72 z-50 md:hidden">
+      <TopNav />
+
+      <header className="fixed top-0 left-0 right-0 h-16 border-b bg-background/80 backdrop-blur-sm z-40 md:hidden">
         <div className="flex items-center justify-between h-full px-4">
           <MobileNav />
         </div>
       </header>
 
-      <Sidebar
-        activeSection={activeSection}
-        setActiveSection={scrollToSection}
-      />
+      <main className="pt-0">
+        <Hero />
+        <Intro />
 
-      <main className="md:pl-72">
-        <div className="container py-8 space-y-8">
-          <HomeMobile />
-          <AboutMe ref={sectionRefs.about} />
-          <Education ref={sectionRefs.education} />
-          <Skills ref={sectionRefs.skills} />
+        <div className="max-w-5xl mx-auto px-4 py-20 space-y-32">
           <Experience ref={sectionRefs.experience} />
+          <Education ref={sectionRefs.education} />
           <Projects ref={sectionRefs.projects} />
         </div>
+
+        <Footer />
       </main>
     </div>
   );

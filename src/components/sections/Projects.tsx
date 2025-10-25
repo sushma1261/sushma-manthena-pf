@@ -67,32 +67,64 @@ const Projects = forwardRef<HTMLElement>((props, ref) => {
     <section ref={ref} id="projects" className="section-scroll">
       <div className="opacity-0" ref={contentRef}>
         <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-          <SquareTerminal className="h-6 w-6" />
+          <SquareTerminal className="h-6 w-6 text-teal-600" />
           Projects
         </h2>
         <div className="grid gap-6 md:grid-cols-3">
           {projectsData.map((project, index) => (
             <Card
               key={index}
-              className="overflow-hidden hover:scale-105 transition-transform animate-fade-in cursor-pointer"
+              className="overflow-hidden hover:scale-105 transition-transform animate-fade-in"
               style={{ animationDelay: `${index * 200}ms` }}
-              onClick={() => handleClick(project.link)}
             >
-              <img
-                src={project.image}
-                alt={project.title}
-                className="w-full h-48 object-cover"
-              />
+              {project.imageWebp || project.imageFallback ? (
+                <picture>
+                  {project.imageWebp && project.imageSrcSet ? (
+                    <source
+                      srcSet={project.imageSrcSet
+                        .map(
+                          (s: { src: string; width: number }) =>
+                            `${s.src} ${s.width}w`
+                        )
+                        .join(", ")}
+                      type="image/webp"
+                      sizes="(max-width: 768px) 480px, (max-width: 1200px) 800px, 1200px"
+                    />
+                  ) : (
+                    project.imageWebp && (
+                      <source srcSet={project.imageWebp} type="image/webp" />
+                    )
+                  )}
+                  <img
+                    src={project.imageFallback ?? project.image}
+                    alt={project.title}
+                    className="w-full h-48 object-cover"
+                  />
+                </picture>
+              ) : (
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-48 object-cover"
+                />
+              )}
               <div className="p-6">
                 <h3 className="font-bold">{project.title}</h3>
                 {project.subtitle && (
-                  <span className="text-sm text-accent italic">
+                  <span className="text-sm text-teal-600 italic">
                     {project.subtitle}
                   </span>
                 )}
                 <p className="text-sm text-muted-foreground mt-2">
                   {project.description}
                 </p>
+                {project.metrics && project.metrics.length > 0 && (
+                  <ul className="mt-3 text-sm list-disc list-inside text-muted-foreground">
+                    {project.metrics.map((m: string, mi: number) => (
+                      <li key={mi}>{m}</li>
+                    ))}
+                  </ul>
+                )}
                 <div className="flex flex-wrap gap-2 mt-4">
                   {project.skills.map((skill, i) => (
                     <Badge
@@ -104,6 +136,25 @@ const Projects = forwardRef<HTMLElement>((props, ref) => {
                       {skill}
                     </Badge>
                   ))}
+                </div>
+                <div className="flex items-center gap-3 mt-4">
+                  {project.demo && (
+                    <button
+                      onClick={() => handleClick(project.demo)}
+                      className="px-3 py-1 rounded-md bg-teal-600 text-white text-sm hover:opacity-90"
+                    >
+                      Demo
+                    </button>
+                  )}
+
+                  {project.github && (
+                    <button
+                      onClick={() => handleClick(project.github)}
+                      className="px-3 py-1 rounded-md border border-teal-600 text-teal-600 text-sm hover:bg-teal-50 dark:hover:bg-teal-950"
+                    >
+                      GitHub
+                    </button>
+                  )}
                 </div>
               </div>
             </Card>
