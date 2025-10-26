@@ -1,11 +1,5 @@
 import { experienceData } from "@/lib/data";
-import {
-  BriefcaseBusiness,
-  CalendarRange,
-  MessageSquare,
-  ShoppingBag,
-  Video,
-} from "lucide-react";
+import { BriefcaseBusiness, CalendarRange } from "lucide-react";
 import { forwardRef, useEffect, useRef, useState } from "react";
 
 const Experience = forwardRef<HTMLElement>((props, ref) => {
@@ -16,19 +10,13 @@ const Experience = forwardRef<HTMLElement>((props, ref) => {
   const [reduceMotion, setReduceMotion] = useState(false);
 
   // Get icon component based on icon name from data
-  const getProjectIcon = (iconName?: string) => {
-    if (!iconName) return null;
+  const getProjectIcon = (icon) => {
+    if (!icon) return null;
 
-    switch (iconName) {
-      case "video":
-        return <Video className="h-4 w-4 text-teal-600" />;
-      case "message":
-        return <MessageSquare className="h-4 w-4 text-teal-600" />;
-      case "shopping":
-        return <ShoppingBag className="h-4 w-4 text-teal-600" />;
-      default:
-        return null;
-    }
+    const IconComponent = icon;
+    if (!IconComponent) return null;
+
+    return <IconComponent className="h-4 w-4 text-teal-600" />;
   };
 
   useEffect(() => {

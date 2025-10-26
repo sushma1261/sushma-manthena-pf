@@ -1,3 +1,4 @@
+import { MessageSquare, ShoppingBag, Video } from "lucide-react";
 import AquaIOT from "./aquaiot.jpeg";
 import CodeBridge from "./codebridg.png";
 import interview from "./interview.jpeg";
@@ -121,7 +122,7 @@ export const experienceData = [
     role: "UI Engineer",
     company: "Flipkart",
     project: "Video Commerce",
-    projectIcon: "video",
+    projectIcon: Video,
     summary:
       "Built Video Commerce UI with React Native, integrated reward APIs, and improved user engagement through interactive video features.",
     tech: ["React Native", "JavaScript", "REST APIs"],
@@ -134,7 +135,7 @@ export const experienceData = [
     role: "Software Development Engineer",
     company: "Flipkart",
     project: "Chat Platform",
-    projectIcon: "message",
+    projectIcon: MessageSquare,
     summary:
       "Led development of Idiom tool, chat bots, and microservices migration to cloud, improving testing efficiency and deployment speed.",
     tech: ["React", "Java", "SpringBoot", "AWS", "Microservices"],
@@ -160,7 +161,7 @@ export const experienceData = [
     role: "Software Development Engineer",
     company: "Flipkart",
     project: "Shopsy",
-    projectIcon: "shopping",
+    projectIcon: ShoppingBag,
     summary:
       "Developed earnings dashboard and integrated engagement tools, contributing to a successful app launch and better user insights.",
     tech: ["React Native", "JavaScript", "Analytics"],
