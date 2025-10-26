@@ -121,6 +121,7 @@ export const experienceData = [
     role: "UI Engineer",
     company: "Flipkart",
     project: "Video Commerce",
+    projectIcon: "video",
     summary:
       "Built Video Commerce UI with React Native, integrated reward APIs, and improved user engagement through interactive video features.",
     tech: ["React Native", "JavaScript", "REST APIs"],
@@ -133,6 +134,7 @@ export const experienceData = [
     role: "Software Development Engineer",
     company: "Flipkart",
     project: "Chat Platform",
+    projectIcon: "message",
     summary:
       "Led development of Idiom tool, chat bots, and microservices migration to cloud, improving testing efficiency and deployment speed.",
     tech: ["React", "Java", "SpringBoot", "AWS", "Microservices"],
@@ -158,11 +160,12 @@ export const experienceData = [
     role: "Software Development Engineer",
     company: "Flipkart",
     project: "Shopsy",
+    projectIcon: "shopping",
     summary:
       "Developed earnings dashboard and integrated engagement tools, contributing to a successful app launch and better user insights.",
     tech: ["React Native", "JavaScript", "Analytics"],
     responsibilities: [
-      "Developed an earnings dashboard and various UI screens for the app’s initial launch in June 2021, contributing to a successful launch and providing users with valuable insights into their earnings",
+      "Developed an earnings dashboard and various UI screens for the app's initial launch in June 2021, contributing to a successful launch and providing users with valuable insights into their earnings",
       "Integrated App with branch.io for user engagement and Mo-engage for push notification and other analytic features.",
     ],
   },
