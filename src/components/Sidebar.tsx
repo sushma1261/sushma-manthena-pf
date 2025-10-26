@@ -10,7 +10,12 @@ const sections = [
   { id: "projects", label: "Projects" },
 ];
 
-export function Sidebar({ activeSection, setActiveSection }) {
+interface SidebarProps {
+  activeSection: string;
+  setActiveSection: (section: string) => void;
+}
+
+export function Sidebar({ activeSection, setActiveSection }: SidebarProps) {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {

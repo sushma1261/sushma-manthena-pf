@@ -67,8 +67,14 @@ const Index = () => {
     <div className="min-h-screen">
       <TopNav />
 
-      <header className="fixed top-0 left-0 right-0 h-16 border-b bg-background/80 backdrop-blur-sm z-40 md:hidden">
+      <header className="fixed top-0 left-0 right-0 h-12 border-b bg-background/80 backdrop-blur-sm z-50 md:hidden">
         <div className="flex items-center justify-between h-full px-4">
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="text-base font-bold hover:text-teal-600 transition-colors"
+          >
+            Sushma Manthena
+          </button>
           <MobileNav />
         </div>
       </header>
