@@ -24,14 +24,17 @@ const Hero: React.FC = () => {
 
   return (
     <section className="min-h-[70vh] flex items-center justify-center bg-gradient-to-br from-teal-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 pt-16">
-      <div className="text-center px-6 max-w-4xl mx-auto space-y-8">
-        <h1 className="font-bold tracking-tight leading-tight">
-          {heroData.headline}
+      <div className="text-center px-6 max-w-4xl mx-auto space-y-4">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight animate-fadeIn [animation-fill-mode:forwards] opacity-0 [animation-delay:100ms]">
+          {heroData.name}
         </h1>
-        <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+        <h2 className="text-3xl md:text-4xl lg:text-4xl font-semibold tracking-tight leading-tight text-teal-600 dark:text-teal-400 animate-fadeIn [animation-fill-mode:forwards] opacity-0 [animation-delay:300ms]">
+          {heroData.headline.role}
+        </h2>
+        <p className="text-xl md:text-2xl lg:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed animate-fadeIn [animation-fill-mode:forwards] opacity-0 [animation-delay:500ms]">
           {heroData.tagline}
         </p>
-        <div className="flex flex-wrap justify-center gap-4 pt-6">
+        <div className="flex flex-wrap justify-center gap-4 pt-6 animate-fadeIn [animation-fill-mode:forwards] opacity-0 [animation-delay:700ms]">
           {heroData.ctas.map((cta) => (
             <a
               key={cta.label}

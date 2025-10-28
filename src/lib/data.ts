@@ -11,18 +11,22 @@ export const siteMetadata = {
   openGraph: {
     title: "Sushma Manthena - Full Stack Developer",
     description:
-      "Building scalable web & mobile applications with React, AI, and cloud",
+      "Building scalable web & mobile applications with NextJS, Java, AI, and Node.js",
     images: ["/og-image.svg"],
   },
 };
 
 export const heroData = {
   name: "Sushma Manthena",
-  headline: "Full Stack Developer | AI Solutions | 4+ Years at Flipkart",
+  headline: {
+    role: "Full Stack Developer",
+    experience: "4+ Years",
+    company: "Flipkart",
+  },
   tagline:
-    "Building scalable web & mobile applications with React, AI, and cloud",
+    "Building scalable web & mobile applications with NextJS, Java, AI, and Node.js",
   ctas: [
-    { label: "View Projects", href: "#projects" },
+    { label: "View Projects", href: "#experience" },
     { label: "See Resume", href: "/SushmaManthenaResume.pdf" },
     { label: "Contact Me", href: "#contact" },
   ],
@@ -32,7 +36,7 @@ export const contactData = {
   email: "varma.sushma1998@gmail.com",
   phone: "+1 206-696-6916",
   linkedin: "https://linkedin.com/in/sushma-varma",
-  github: "https://github.com/sushma-manthena",
+  github: "https://github.com/sushma1261",
   location: "Seattle, WA",
 };
 
@@ -47,6 +51,8 @@ export const educationData = [
       "Machine Learning",
       "Research Methods in Software Development",
       "High Performance Computing",
+      "Software Architecture",
+      "Algorithm Design And Analysis",
     ],
     cgpa: "3.85/4",
   },

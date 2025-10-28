@@ -4,10 +4,10 @@ const Intro: React.FC = () => {
   return (
     <section className="py-20 md:py-32 bg-white dark:bg-gray-900">
       <div className="max-w-4xl mx-auto px-6">
-        <h2 className="font-bold text-center mb-10">
+        <h2 className="font-bold text-center mb-10 animate-fadeIn [animation-fill-mode:forwards] opacity-0 [animation-delay:800ms]">
           Hi, I'm Sushma. Nice to meet you.
         </h2>
-        <p className="text-xl md:text-2xl text-muted-foreground text-center leading-relaxed">
+        <p className="text-xl md:text-2xl text-muted-foreground text-center leading-relaxed animate-fadeIn [animation-fill-mode:forwards] opacity-0 [animation-delay:1000ms]">
           Since beginning my journey as a software developer, I've worked at
           Flipkart for over 4 years building scalable web and mobile
           applications. I've led the development of conversational design tools,

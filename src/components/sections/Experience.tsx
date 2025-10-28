@@ -143,13 +143,17 @@ const Experience = forwardRef<HTMLElement>((props, ref) => {
                 <div
                   className={`
                     relative
-                    border border-border/40 md:border-0
-                    md:border-b md:border-border/40 last:border-b-0
-                    rounded-lg md:rounded-none
-                    mb-4 md:mb-0
+                    border border-border/60
+                    rounded-lg
+                    mb-4
                     transition-all duration-300 ease-in-out
                     hover:bg-muted/20
-                    ${expandedIndex === index ? "bg-muted/30" : ""}
+                    hover:border-teal-600/40
+                    ${
+                      expandedIndex === index
+                        ? "bg-muted/30 border-teal-600/60"
+                        : ""
+                    }
                   `}
                 >
                   <div className="grid md:grid-cols-[280px_1fr] gap-6 py-6 px-4 md:px-6">
