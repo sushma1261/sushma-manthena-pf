@@ -116,6 +116,13 @@ export const skillsData = {
   ],
 };
 
+// Icon mapping for experience projects
+export const projectIcons = {
+  video: Video,
+  message: MessageSquare,
+  shopping: ShoppingBag,
+};
+
 export const experienceData = [
   {
     dates: "May 2024 - Aug 2024",
@@ -138,7 +145,7 @@ export const experienceData = [
     projectIcon: MessageSquare,
     summary:
       "Led development of Idiom tool, chat bots, and microservices migration to cloud, improving testing efficiency and deployment speed.",
-    tech: ["React", "Java", "SpringBoot", "AWS", "Microservices"],
+    tech: ["React", "Java", "SpringBoot", "Microservices"],
     projects: {
       "Idiom and Dialog Manager": [
         "Developed Idiom from scratch, a conversational design tool using ReactJS and Java, enabling designers to define user flows and journeys, and improved its performance by 6 times.",

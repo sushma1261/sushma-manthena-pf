@@ -1,5 +1,5 @@
 import { experienceData } from "@/lib/data";
-import { BriefcaseBusiness, CalendarRange } from "lucide-react";
+import { BriefcaseBusiness, CalendarRange, LucideIcon } from "lucide-react";
 import { forwardRef, useEffect, useRef, useState } from "react";
 
 const Experience = forwardRef<HTMLElement>((props, ref) => {
@@ -9,14 +9,20 @@ const Experience = forwardRef<HTMLElement>((props, ref) => {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
   const [reduceMotion, setReduceMotion] = useState(false);
 
-  // Get icon component based on icon name from data
-  const getProjectIcon = (icon) => {
-    if (!icon) return null;
-
-    const IconComponent = icon;
+  // Render project icon with animations
+  const renderProjectIcon = (
+    IconComponent: LucideIcon | undefined,
+    isExpanded: boolean
+  ) => {
     if (!IconComponent) return null;
 
-    return <IconComponent className="h-4 w-4 text-teal-600" />;
+    return (
+      <IconComponent
+        className={`h-4 w-4 text-teal-600 transition-transform duration-300 group-hover:animate-icon-pulse ${
+          isExpanded ? "animate-icon-rotate" : ""
+        }`}
+      />
+    );
   };
 
   useEffect(() => {
@@ -129,7 +135,7 @@ const Experience = forwardRef<HTMLElement>((props, ref) => {
             return (
               <div
                 key={index}
-                className="relative animate-fade-in group"
+                className="relative group animate-fade-in"
                 style={{ animationDelay: `${index * 150}ms` }}
                 ref={(el) => (cardRefs.current[index] = el)}
               >
@@ -147,8 +153,11 @@ const Experience = forwardRef<HTMLElement>((props, ref) => {
                   `}
                 >
                   <div className="grid md:grid-cols-[280px_1fr] gap-6 py-6 px-4 md:px-6">
-                    {/* Left Side - Company & Timeline (Fixed on Desktop) */}
-                    <div className="md:pr-6 md:border-r md:border-border/40">
+                    {/* Left Side - Company & Timeline (Slide in from left) */}
+                    <div
+                      className="md:pr-6 md:border-r md:border-border/40 animate-slide-in-left"
+                      style={{ animationDelay: `${index * 150}ms` }}
+                    >
                       <div className="md:sticky md:top-24">
                         <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
                           <CalendarRange className="h-4 w-4 text-teal-600" />
@@ -163,12 +172,18 @@ const Experience = forwardRef<HTMLElement>((props, ref) => {
                       </div>
                     </div>
 
-                    {/* Right Side - Details */}
-                    <div className="md:pl-2">
+                    {/* Right Side - Details (Slide in from right) */}
+                    <div
+                      className="md:pl-2 animate-slide-in-right"
+                      style={{ animationDelay: `${index * 150}ms` }}
+                    >
                       <div className="flex items-start justify-between gap-4 mb-3">
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-2">
-                            {getProjectIcon(exp.projectIcon)}
+                            {renderProjectIcon(
+                              exp.projectIcon,
+                              expandedIndex === index
+                            )}
                             <p className="text-base font-semibold text-foreground/90">
                               {exp.project}
                             </p>
@@ -195,13 +210,18 @@ const Experience = forwardRef<HTMLElement>((props, ref) => {
                         </button>
                       </div>
 
-                      {/* Tech tags */}
+                      {/* Tech tags with cascade animation */}
                       {exp.tech && (
                         <div className="flex flex-wrap gap-2 mt-3">
                           {exp.tech.map((tech, i) => (
                             <span
                               key={i}
-                              className="text-xs px-2.5 py-1 bg-muted text-muted-foreground rounded-md font-medium group-hover:bg-teal-600/10 group-hover:text-teal-600 transition-colors"
+                              className="animate-tag-cascade text-xs px-2.5 py-1 bg-muted text-muted-foreground rounded-md font-medium group-hover:bg-teal-600/10 group-hover:text-teal-600 transition-colors"
+                              style={{
+                                animationDelay: `${
+                                  index * 150 + 400 + i * 150
+                                }ms`,
+                              }}
                             >
                               {tech}
                             </span>
