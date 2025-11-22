@@ -1,17 +1,22 @@
 import { contactData } from "@/lib/data";
 import { Github, Linkedin, Mail, MapPin } from "lucide-react";
-import React from "react";
+import { forwardRef } from "react";
 
-const Footer: React.FC = () => {
+import { MagneticButton } from "../ui/MagneticButton";
+
+const Footer = forwardRef<HTMLElement>((props, ref) => {
   return (
     <footer
+      ref={ref}
       id="contact"
-      className="py-20 md:py-32 bg-gradient-to-br from-teal-50 to-blue-50 dark:from-gray-900 dark:to-gray-800"
+      className="bg-muted/30 border-t border-border/40 py-20"
     >
-      <div className="max-w-4xl mx-auto px-6 text-center space-y-8">
-        <h2 className="font-bold animate-fadeIn [animation-fill-mode:forwards] opacity-0 [animation-delay:100ms]">
-          Let's work together
-        </h2>
+      <div className="max-w-4xl mx-auto px-6 text-center">
+        <MagneticButton className="inline-block">
+            <h2 className="text-4xl md:text-5xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-teal-600 to-primary cursor-default">
+            Let's work together
+            </h2>
+        </MagneticButton>
         <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto animate-fadeIn [animation-fill-mode:forwards] opacity-0 [animation-delay:300ms]">
           I'm currently looking for opportunities. Let's connect!
         </p>
@@ -57,6 +62,7 @@ const Footer: React.FC = () => {
       </div>
     </footer>
   );
-};
+});
 
+Footer.displayName = "Footer";
 export default Footer;

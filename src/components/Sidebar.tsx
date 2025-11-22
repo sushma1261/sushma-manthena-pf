@@ -1,13 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Mail } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
+import { MagneticButton } from "./ui/MagneticButton";
 
 const sections = [
   { id: "about", label: "About" },
+  { id: "experience", label: "Experience" },
   { id: "education", label: "Education" },
   { id: "skills", label: "Skills" },
-  { id: "experience", label: "Experience" },
   { id: "projects", label: "Projects" },
+  { id: "contact", label: "Contact" },
 ];
 
 interface SidebarProps {
@@ -53,29 +55,35 @@ export function Sidebar({ activeSection, setActiveSection }: SidebarProps) {
 
       <div className="space-y-4">
         <div className="flex gap-2">
-          <Button variant="ghost" size="icon" asChild>
-            <a
-              href="https://github.com/sushma1261"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Github className="h-5 w-5" />
-            </a>
-          </Button>
-          <Button variant="ghost" size="icon" asChild>
-            <a
-              href="https://linkedin.com/in/sushma-varma"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Linkedin className="h-5 w-5" />
-            </a>
-          </Button>
-          <Button variant="ghost" size="icon" asChild>
-            <a href="mailto:varma.sushma1998@gmail.com">
-              <Mail className="h-5 w-5" />
-            </a>
-          </Button>
+          <MagneticButton>
+            <Button variant="ghost" size="icon" asChild>
+              <a
+                href="https://github.com/sushma1261"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Github className="h-5 w-5" />
+              </a>
+            </Button>
+          </MagneticButton>
+          <MagneticButton>
+            <Button variant="ghost" size="icon" asChild>
+              <a
+                href="https://linkedin.com/in/sushma-varma"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Linkedin className="h-5 w-5" />
+              </a>
+            </Button>
+          </MagneticButton>
+          <MagneticButton>
+            <Button variant="ghost" size="icon" asChild>
+              <a href="mailto:varma.sushma1998@gmail.com">
+                <Mail className="h-5 w-5" />
+              </a>
+            </Button>
+          </MagneticButton>
           <ThemeToggle />
         </div>
       </div>

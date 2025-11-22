@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import { ThemeToggle } from "./ThemeToggle";
+import { MagneticButton } from "./ui/MagneticButton";
 
 const sections = [
   { id: "experience", label: "Experience" },
   { id: "education", label: "Education" },
+  { id: "skills", label: "Skills" },
   { id: "projects", label: "Projects" },
+  { id: "contact", label: "Contact" },
 ];
 
 export function TopNav() {
@@ -56,21 +59,24 @@ export function TopNav() {
           <div className="flex items-center gap-6">
             <div className="hidden md:flex items-center gap-6">
               {sections.map((section) => (
-                <button
-                  key={section.id}
-                  onClick={() => scrollToSection(section.id)}
-                  className="text-sm font-medium hover:text-teal-600 transition-colors"
-                >
-                  {section.label}
-                </button>
+                <MagneticButton key={section.id}>
+                  <button
+                    onClick={() => scrollToSection(section.id)}
+                    className="text-sm font-medium hover:text-teal-600 transition-colors"
+                  >
+                    {section.label}
+                  </button>
+                </MagneticButton>
               ))}
-              <a
-                href="/SushmaManthenaResume.pdf"
-                download
-                className="px-4 py-2 bg-teal-600 text-white rounded-lg text-sm font-medium hover:bg-teal-700 transition-colors"
-              >
-                Resume
-              </a>
+              <MagneticButton>
+                <a
+                  href="/SushmaManthenaResume.pdf"
+                  download
+                  className="px-4 py-2 bg-teal-600 text-white rounded-lg text-sm font-medium hover:bg-teal-700 transition-colors"
+                >
+                  Resume
+                </a>
+              </MagneticButton>
             </div>
             <ThemeToggle />
           </div>

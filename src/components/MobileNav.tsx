@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button";
 import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetTrigger,
+    Sheet,
+    SheetClose,
+    SheetContent,
+    SheetTrigger,
 } from "@/components/ui/sheet";
 import { Github, Linkedin, Mail, Menu } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
@@ -11,7 +11,9 @@ import { ThemeToggle } from "./ThemeToggle";
 const sections = [
   { id: "experience", label: "Experience" },
   { id: "education", label: "Education" },
+  { id: "skills", label: "Skills" },
   { id: "projects", label: "Projects" },
+  { id: "contact", label: "Contact" },
 ];
 
 export function MobileNav() {

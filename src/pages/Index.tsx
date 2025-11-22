@@ -6,6 +6,7 @@ import Footer from "@/components/sections/Footer";
 import Hero from "@/components/sections/Hero";
 import Intro from "@/components/sections/Intro";
 import Projects from "@/components/sections/Projects";
+import Skills from "@/components/sections/Skills";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 const Index = () => {
@@ -15,14 +16,18 @@ const Index = () => {
   const experienceRef = useRef<HTMLElement>(null);
   const educationRef = useRef<HTMLElement>(null);
   const projectsRef = useRef<HTMLElement>(null);
+  const skillsRef = useRef<HTMLElement>(null);
+  const contactRef = useRef<HTMLElement>(null);
 
   const sectionRefs = useMemo(
     () => ({
       experience: experienceRef,
       education: educationRef,
       projects: projectsRef,
+      skills: skillsRef,
+      contact: contactRef,
     }),
-    [experienceRef, educationRef, projectsRef]
+    [experienceRef, educationRef, projectsRef, skillsRef, contactRef]
   );
 
   useEffect(() => {
@@ -86,10 +91,11 @@ const Index = () => {
         <div className="max-w-5xl mx-auto px-4 py-20 space-y-32">
           <Experience ref={sectionRefs.experience} />
           <Education ref={sectionRefs.education} />
+          <Skills ref={sectionRefs.skills} />
           <Projects ref={sectionRefs.projects} />
         </div>
 
-        <Footer />
+        <Footer ref={sectionRefs.contact} />
       </main>
     </div>
   );

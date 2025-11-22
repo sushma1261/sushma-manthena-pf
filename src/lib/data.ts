@@ -194,7 +194,7 @@ export const projectsData = [
     skills: ["Node.js", "GenAI", "ReactJS", "Typescript"],
     demo: "https://mock-interview-frontend-peach.vercel.app/",
     github: "https://github.com/sushma-manthena/MockItUp",
-    metrics: ["5x hiring throughput"],
+    // metrics: ["5x hiring throughput"],
     image: interview,
   },
   {

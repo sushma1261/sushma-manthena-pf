@@ -1,288 +1,245 @@
 import { experienceData } from "@/lib/data";
-import { BriefcaseBusiness, CalendarRange, LucideIcon } from "lucide-react";
+import { BriefcaseBusiness, CalendarRange, ChevronLeft, ChevronRight, LucideIcon, X } from "lucide-react";
 import { forwardRef, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
+import { Badge } from "../ui/badge";
+import { Card } from "../ui/card";
 
 const Experience = forwardRef<HTMLElement>((props, ref) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const contentRefs = useRef<Array<HTMLDivElement | null>>([]);
-  const cardRefs = useRef<Array<HTMLDivElement | null>>([]);
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
-  const [reduceMotion, setReduceMotion] = useState(false);
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
+  const [selectedExp, setSelectedExp] = useState<typeof experienceData[0] | null>(null);
 
   // Render project icon with animations
   const renderProjectIcon = (
     IconComponent: LucideIcon | undefined,
-    isExpanded: boolean
   ) => {
     if (!IconComponent) return null;
 
     return (
       <IconComponent
-        className={`h-4 w-4 text-teal-600 transition-transform duration-300 group-hover:animate-icon-pulse ${
-          isExpanded ? "animate-icon-rotate" : ""
-        }`}
+        className="h-4 w-4 text-teal-600 group-hover:animate-icon-pulse"
       />
     );
   };
 
-  useEffect(() => {
-    if (typeof window === "undefined" || !window.matchMedia) return;
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const handleChange = () => setReduceMotion(mq.matches);
-    handleChange();
-    if (mq.addEventListener) mq.addEventListener("change", handleChange);
-    else mq.addListener(handleChange);
-    return () => {
-      if (mq.removeEventListener)
-        mq.removeEventListener("change", handleChange);
-      else mq.removeListener(handleChange);
-    };
-  }, []);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("animate-fadeIn");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.08 }
-    );
-
-    if (containerRef.current) observer.observe(containerRef.current);
-    return () => observer.disconnect();
-  }, []);
-
-  const toggle = (i: number) => {
-    setExpandedIndex((prev) => (prev === i ? null : i));
-
-    // Scroll expanded card into view with offset for fixed nav
-    if (expandedIndex !== i) {
-      setTimeout(() => {
-        const card = cardRefs.current[i];
-        if (card) {
-          const offset = 100; // Account for fixed nav
-          const elementPosition = card.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: "smooth",
-          });
-        }
-      }, 100);
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = 400; // Width of a card
+      scrollContainerRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
     }
   };
 
+  // Close modal on escape key
   useEffect(() => {
-    if (reduceMotion) {
-      contentRefs.current.forEach((el, idx) => {
-        if (!el) return;
-        if (expandedIndex === idx) {
-          el.style.maxHeight = "none";
-          el.style.opacity = "1";
-        } else {
-          el.style.maxHeight = "0px";
-          el.style.opacity = "0";
-        }
-      });
-      return;
-    }
-
-    contentRefs.current.forEach((el, idx) => {
-      if (!el) return;
-      el.style.overflow = "hidden";
-      el.style.transition =
-        "max-height 300ms ease-in-out, opacity 300ms ease-in-out";
-
-      if (expandedIndex === idx) {
-        const scrollH = el.scrollHeight;
-        requestAnimationFrame(() => {
-          el.style.maxHeight = `${scrollH}px`;
-          el.style.opacity = "1";
-        });
-      } else {
-        el.style.maxHeight = "0px";
-        el.style.opacity = "0";
-      }
-    });
-  }, [expandedIndex, reduceMotion]);
-
-  useEffect(() => {
-    if (reduceMotion) return;
-    const onResize = () => {
-      if (expandedIndex === null) return;
-      const el = contentRefs.current[expandedIndex];
-      if (el) el.style.maxHeight = `${el.scrollHeight}px`;
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSelectedExp(null);
     };
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, [expandedIndex, reduceMotion]);
+    window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
+  }, []);
+
+  // Prevent body scroll when modal is open
+  useEffect(() => {
+    if (selectedExp) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [selectedExp]);
 
   return (
-    <section ref={ref} id="experience" className="section-scroll">
-      <div className="opacity-0" ref={containerRef}>
-        <h2 className="text-2xl font-bold mb-8 flex items-center gap-2">
-          <BriefcaseBusiness className="h-6 w-6" />
-          Experience
-        </h2>
+    <section ref={ref} id="experience" className="section-scroll overflow-hidden">
+      <div className="opacity-0 animate-fadeIn [animation-fill-mode:forwards]" ref={containerRef}>
+        <div className="flex items-center justify-between mb-8 px-4 md:px-0">
+            <h2 className="text-2xl font-bold flex items-center gap-2">
+            <BriefcaseBusiness className="h-6 w-6 text-teal-600" />
+            Experience
+            </h2>
+            
+            <div className="flex gap-2">
+                <button 
+                    onClick={() => scroll('left')}
+                    className="p-2 rounded-full bg-muted hover:bg-teal-100 dark:hover:bg-teal-900/30 transition-colors"
+                    aria-label="Scroll left"
+                >
+                    <ChevronLeft className="h-5 w-5" />
+                </button>
+                <button 
+                    onClick={() => scroll('right')}
+                    className="p-2 rounded-full bg-muted hover:bg-teal-100 dark:hover:bg-teal-900/30 transition-colors"
+                    aria-label="Scroll right"
+                >
+                    <ChevronRight className="h-5 w-5" />
+                </button>
+            </div>
+        </div>
 
-        <div className="space-y-0">
+        {/* Horizontal Scroll Container */}
+        <div 
+            ref={scrollContainerRef}
+            className="flex overflow-x-auto gap-6 pb-8 px-4 md:px-0 snap-x snap-mandatory scrollbar-hide fam-gallery-marquee"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
           {experienceData.map((exp, index) => {
             return (
               <div
                 key={index}
-                className="relative group animate-fade-in"
-                style={{ animationDelay: `${index * 150}ms` }}
-                ref={(el) => (cardRefs.current[index] = el)}
+                className="flex-none w-[85vw] md:w-[400px] snap-center"
               >
-                {/* Split-Screen Layout */}
-                <div
-                  className={`
-                    relative
-                    border border-border/60
-                    rounded-lg
-                    mb-4
-                    transition-all duration-300 ease-in-out
-                    hover:bg-muted/20
-                    hover:border-teal-600/40
-                    ${
-                      expandedIndex === index
-                        ? "bg-muted/30 border-teal-600/60"
-                        : ""
-                    }
-                  `}
+                <Card
+                  className="h-full relative border-l-4 border-l-teal-600 border-y border-r border-border transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl hover:border-teal-500/40 flex flex-col bg-card group"
                 >
-                  <div className="grid md:grid-cols-[280px_1fr] gap-6 py-6 px-4 md:px-6">
-                    {/* Left Side - Company & Timeline (Slide in from left) */}
-                    <div
-                      className="md:pr-6 md:border-r md:border-border/40 animate-slide-in-left"
-                      style={{ animationDelay: `${index * 150}ms` }}
-                    >
-                      <div className="md:sticky md:top-24">
-                        <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
-                          <CalendarRange className="h-4 w-4 text-teal-600" />
-                          <span className="font-medium">{exp.dates}</span>
-                        </div>
-                        <h3 className="font-bold text-lg text-foreground mb-1 group-hover:text-teal-600 transition-colors">
-                          {exp.company}
-                        </h3>
-                        <p className="text-sm text-muted-foreground">
-                          {exp.role}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Right Side - Details (Slide in from right) */}
-                    <div
-                      className="md:pl-2 animate-slide-in-right"
-                      style={{ animationDelay: `${index * 150}ms` }}
-                    >
-                      <div className="flex items-start justify-between gap-4 mb-3">
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2 mb-2">
-                            {renderProjectIcon(
-                              exp.projectIcon,
-                              expandedIndex === index
-                            )}
-                            <p className="text-base font-semibold text-foreground/90">
-                              {exp.project}
-                            </p>
-                          </div>
-                          <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
-                            {exp.summary}
-                          </p>
-                        </div>
-
-                        <button
-                          id={`exp-trigger-${index}`}
-                          onClick={() => toggle(index)}
-                          onKeyDown={(e) => {
-                            if (e.key === "Enter" || e.key === " ") {
-                              e.preventDefault();
-                              toggle(index);
-                            }
-                          }}
-                          aria-expanded={expandedIndex === index}
-                          aria-controls={`exp-details-${index}`}
-                          className="flex-shrink-0 text-xs font-medium px-3 py-1.5 rounded-md bg-muted hover:bg-teal-600/10 hover:text-teal-600 text-muted-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-teal-600/50"
-                        >
-                          {expandedIndex === index ? "Less" : "Details"}
-                        </button>
-                      </div>
-
-                      {/* Tech tags with cascade animation */}
-                      {exp.tech && (
-                        <div className="flex flex-wrap gap-2 mt-3">
-                          {exp.tech.map((tech, i) => (
-                            <span
-                              key={i}
-                              className="animate-tag-cascade text-xs px-2.5 py-1 bg-muted text-muted-foreground rounded-md font-medium group-hover:bg-teal-600/10 group-hover:text-teal-600 transition-colors"
-                              style={{
-                                animationDelay: `${
-                                  index * 150 + 400 + i * 150
-                                }ms`,
-                              }}
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-
-                      {/* Expandable details */}
-                      <div
-                        id={`exp-details-${index}`}
-                        role="region"
-                        aria-labelledby={`exp-trigger-${index}`}
-                        ref={(el) => (contentRefs.current[index] = el)}
-                        style={{ maxHeight: "0px", opacity: 0 }}
-                      >
-                        <div className="pt-4 mt-4 border-t border-border/30">
-                          {exp.responsibilities && (
-                            <div className="mb-5">
-                              <p className="font-semibold mb-2.5 text-sm text-foreground flex items-center gap-2">
-                                <span className="w-1 h-4 bg-teal-600 rounded-full"></span>
-                                Responsibilities
-                              </p>
-                              <ul className="list-disc list-inside text-sm text-muted-foreground space-y-2 leading-relaxed ml-3">
-                                {exp.responsibilities.map((resp, i) => (
-                                  <li key={i}>{resp}</li>
-                                ))}
-                              </ul>
+                    <div className="p-6 flex flex-col h-full">
+                        {/* Header */}
+                        <div className="mb-4">
+                            <div className="flex items-center gap-2 text-sm text-teal-600 font-medium mb-2">
+                                <CalendarRange className="h-4 w-4" />
+                                <span>{exp.dates}</span>
                             </div>
-                          )}
-
-                          {exp.projects &&
-                            Object.keys(exp.projects).map((project, i) => (
-                              <div key={i} className="mb-5 last:mb-0">
-                                <p className="font-semibold mb-2.5 text-sm text-foreground flex items-center gap-2">
-                                  <span className="w-1 h-4 bg-teal-600 rounded-full"></span>
-                                  {project}
-                                </p>
-                                <ul className="list-disc list-inside text-sm text-muted-foreground ml-5 space-y-2 leading-relaxed">
-                                  {exp.projects![project].map((item, idx) => (
-                                    <li key={idx}>{item}</li>
-                                  ))}
-                                </ul>
-                              </div>
-                            ))}
+                            <h3 className="font-bold text-xl mb-1 group-hover:text-teal-600 transition-colors">
+                                {exp.company}
+                            </h3>
+                            <p className="text-muted-foreground font-medium">
+                                {exp.role}
+                            </p>
                         </div>
-                      </div>
-                    </div>
-                  </div>
 
-                  {/* Teal accent line on left edge */}
-                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-transparent via-teal-600 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
+                        {/* Project Info */}
+                        <div className="flex items-center gap-2 mb-3">
+                            {renderProjectIcon(exp.projectIcon)}
+                            <p className="text-sm font-semibold">
+                                {exp.project}
+                            </p>
+                        </div>
+
+                        <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-grow">
+                            {exp.summary}
+                        </p>
+
+                        {/* Tech Tags */}
+                        {exp.tech && (
+                            <div className="flex flex-wrap gap-2 mb-4">
+                                {exp.tech.map((tech, i) => (
+                                    <Badge key={i} variant="secondary" className="text-xs">
+                                        {tech}
+                                    </Badge>
+                                ))}
+                            </div>
+                        )}
+
+                        {/* Details Toggle */}
+                        <button
+                            onClick={() => setSelectedExp(exp)}
+                            className="w-full mt-auto py-2 text-sm font-medium text-teal-600 hover:bg-teal-50 dark:hover:bg-teal-900/20 rounded-md transition-colors flex items-center justify-center gap-1"
+                        >
+                            Read More
+                            <ChevronRight className="h-4 w-4" />
+                        </button>
+                    </div>
+                </Card>
               </div>
             );
           })}
         </div>
       </div>
+
+      {/* Glass Modal */}
+      {selectedExp && createPortal(
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
+          {/* Backdrop */}
+          <div 
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-fadeIn"
+            onClick={() => setSelectedExp(null)}
+          />
+          
+          {/* Modal Content */}
+          <div className="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto bg-background/95 backdrop-blur-xl border border-border rounded-2xl shadow-2xl animate-slideUpFade">
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedExp(null)}
+              className="absolute top-4 right-4 p-2 rounded-full hover:bg-muted transition-colors z-10"
+            >
+              <X className="h-5 w-5" />
+            </button>
+
+            <div className="p-6 md:p-8">
+              {/* Header */}
+              <div className="mb-6 border-b border-border/50 pb-6">
+                <div className="flex items-center gap-2 text-sm text-teal-600 font-medium mb-2">
+                    <CalendarRange className="h-4 w-4" />
+                    <span>{selectedExp.dates}</span>
+                </div>
+                <h2 className="text-2xl md:text-3xl font-bold mb-2">{selectedExp.company}</h2>
+                <p className="text-lg text-muted-foreground font-medium">{selectedExp.role}</p>
+                
+                <div className="flex items-center gap-2 mt-4">
+                    {renderProjectIcon(selectedExp.projectIcon)}
+                    <p className="font-semibold">{selectedExp.project}</p>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div className="space-y-6">
+                <div>
+                    <h4 className="text-sm font-bold uppercase tracking-wider text-muted-foreground mb-3">Summary</h4>
+                    <p className="text-foreground/90 leading-relaxed">
+                        {selectedExp.summary}
+                    </p>
+                </div>
+
+                {selectedExp.tech && (
+                    <div>
+                        <h4 className="text-sm font-bold uppercase tracking-wider text-muted-foreground mb-3">Technologies</h4>
+                        <div className="flex flex-wrap gap-2">
+                            {selectedExp.tech.map((tech, i) => (
+                                <Badge key={i} variant="secondary">
+                                    {tech}
+                                </Badge>
+                            ))}
+                        </div>
+                    </div>
+                )}
+
+                {selectedExp.responsibilities && (
+                    <div>
+                        <h4 className="text-sm font-bold uppercase tracking-wider text-muted-foreground mb-3">Key Responsibilities</h4>
+                        <ul className="space-y-3">
+                            {selectedExp.responsibilities.map((resp, i) => (
+                                <li key={i} className="flex gap-3 text-sm text-muted-foreground leading-relaxed">
+                                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-teal-600 flex-shrink-0" />
+                                    <span>{resp}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
+
+                {selectedExp.projects && Object.keys(selectedExp.projects).map((project, i) => (
+                    <div key={i}>
+                        <h4 className="text-sm font-bold uppercase tracking-wider text-muted-foreground mb-3">{project}</h4>
+                        <ul className="space-y-3">
+                            {selectedExp.projects![project].map((item, idx) => (
+                                <li key={idx} className="flex gap-3 text-sm text-muted-foreground leading-relaxed">
+                                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-teal-600 flex-shrink-0" />
+                                    <span>{item}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
     </section>
   );
 });
