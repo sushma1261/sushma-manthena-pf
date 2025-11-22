@@ -12,22 +12,24 @@ const Index = lazy(() => import("./pages/Index"));
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Suspense fallback={<Loader />}>
-          <Routes>
-            <Route path="/" element={<Index />} />
-          </Routes>
-        </Suspense>
-      </BrowserRouter>
-      <Analytics />
-      <SpeedInsights />
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Suspense fallback={<Loader />}>
+            <Routes>
+              <Route path="/" element={<Index />} />
+            </Routes>
+          </Suspense>
+        </BrowserRouter>
+        <Analytics />
+        <SpeedInsights />
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;
