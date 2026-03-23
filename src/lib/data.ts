@@ -1,4 +1,4 @@
-import { MessageSquare, ShoppingBag, Video } from "lucide-react";
+import { MessageSquare, Router, ShoppingBag, Video } from "lucide-react";
 import AquaIOT from "./aquaiot.jpeg";
 import CodeBridge from "./codebridg.png";
 import interview from "./interview.jpeg";
@@ -122,14 +122,21 @@ export const skillsData = {
   ],
 };
 
-// Icon mapping for experience projects
-export const projectIcons = {
-  video: Video,
-  message: MessageSquare,
-  shopping: ShoppingBag,
-};
-
 export const experienceData = [
+  {
+    dates: "Jan 2026 - Present",
+    role: "Senior Software Engineer",
+    company: "Dhan AI",
+    project: "Ziply Fiber",
+    projectIcon: Router,
+    summary:
+      "Enhanced performance and observability initiatives, delivering an 80x reduction in app load times and establishing robust production monitoring standards.",
+    tech: ["Node.js", "GraphQL", "ReactJS", "TypeScript"],
+    responsibilities: [
+      "Engineered an event-driven architecture with Redis caching for the MyAccounts app, drastically reducing load times from 20s to 150ms (80x speedup).",
+      "Implemented comprehensive structured logging across the Node.js backend to maximize system observability, facilitating proactive issue detection and accelerating root cause analysis in production.",
+    ],
+  },
   {
     dates: "May 2024 - Aug 2024",
     role: "UI Engineer",
@@ -199,7 +206,7 @@ export const projectsData = [
   },
   {
     title: "Luna mHealth App",
-    subtitle: "In Progress",
+    // subtitle: "In Progress",
     description:
       "Developing an offline-first mobile app that provides multilingual, audio-enabled health education content to underserved communities with limited internet access.",
     skills: ["Flutter", "Dart", "Mockito"],
