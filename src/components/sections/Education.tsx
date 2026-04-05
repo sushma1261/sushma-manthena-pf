@@ -1,81 +1,48 @@
-"use client";
-
 import { educationData } from "@/lib/data";
-import { BookOpen, GraduationCap } from "lucide-react";
-import { forwardRef, useEffect, useRef } from "react";
-import { Badge } from "../ui/badge";
-import { Card } from "../ui/card";
+import { forwardRef } from "react";
 
 const Education = forwardRef<HTMLElement>((props, ref) => {
-  const contentRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("animate-fadeIn");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 },
-    );
-
-    if (contentRef.current) {
-      observer.observe(contentRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <section ref={ref} id="education" className="section-scroll py-20">
-      <div
-        className="container mx-auto px-4 md:px-6 opacity-0"
-        ref={contentRef}
-      >
-        <h2 className="text-3xl font-bold mb-12 flex items-center gap-3">
-          <GraduationCap className="h-8 w-8 text-teal-600" />
+    <section ref={ref} id="education" className="py-32 px-8 md:px-24 bg-surface">
+      {/* Header row */}
+      <div className="mb-16 reveal">
+        <h2 className="font-headline text-4xl md:text-6xl font-bold tracking-tight text-on-surface">
           Education
         </h2>
+      </div>
 
-        <div className="grid gap-6">
-          {educationData.map((edu, index) => (
-            <Card
-              key={index}
-              className="p-6 border-l-4 border-teal-600 group hover:shadow-lg transition-shadow animate-fade-in"
-              style={{ animationDelay: `${index * 200}ms` }}
-            >
-              <div className="flex items-center gap-3 mb-2">
-                <BookOpen className="h-5 w-5 text-teal-600" />
-                <h3 className="font-bold text-lg md:text-xl">{edu.degree}</h3>
-              </div>
-
-              <p className="text-muted-foreground font-medium">{edu.school}</p>
-              <p className="text-sm text-muted-foreground">{edu.year}</p>
-              {edu.cgpa && (
-                <p className="text-sm text-muted-foreground">
-                  CGPA: {edu.cgpa}
+      {/* Content row */}
+      <div className="reveal">
+        <div className="space-y-12">
+            {educationData.map((edu, index) => (
+              <div key={index}>
+                <h4 className="font-headline text-2xl font-bold text-on-surface mb-1">
+                  {edu.degree}
+                </h4>
+                <p className="font-body text-on-surface-variant">{edu.school}</p>
+                <p className="font-label text-sm text-primary font-medium mt-1">
+                  {edu.year}
+                  {edu.cgpa && (
+                    <span className="text-outline font-normal ml-4">
+                      GPA: {edu.cgpa}
+                    </span>
+                  )}
                 </p>
-              )}
-
-              {edu.courses && edu.courses.length > 0 && (
-                <div className="flex flex-wrap gap-2 mt-3">
-                  {edu.courses.map((course, idx) => (
-                    <Badge
-                      key={idx}
-                      variant="outline"
-                      className="hover:scale-105 transition-transform text-sm"
-                    >
-                      {course}
-                    </Badge>
-                  ))}
-                </div>
-              )}
-            </Card>
-          ))}
-        </div>
+                {edu.courses && edu.courses.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mt-4">
+                    {edu.courses.map((course, idx) => (
+                      <span
+                        key={idx}
+                        className="font-label text-xs uppercase tracking-wider text-outline border border-outline-variant px-2.5 py-1"
+                      >
+                        {course}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
       </div>
     </section>
   );

@@ -71,43 +71,60 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground antialiased selection:bg-teal-500/20 selection:text-teal-900 dark:selection:text-teal-100;
-    font-family:
-      "Inter",
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      "Roboto",
-      "Oxygen",
-      "Ubuntu",
-      "Cantarell",
-      sans-serif;
-    /* Improves font rendering on macOS */
+    background-color: #f7f9fb;
+    color: #2a3439;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+}
 
-  /* Refined Typography */
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-sans tracking-tight text-foreground;
-  }
+/* Editorial grid layout */
+.editorial-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
 
-  h1 {
-    @apply text-4xl font-extrabold lg:text-5xl;
+@media (max-width: 768px) {
+  .editorial-grid {
+    grid-template-columns: 1fr;
   }
+}
 
-  h2 {
-    @apply text-3xl font-semibold transition-colors first:mt-0;
-  }
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform;
+}
 
-  h3 {
-    @apply text-2xl md:text-3xl font-semibold;
-  }
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero load animation */
+.fade-in-load {
+  animation: fadeInLoad 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes fadeInLoad {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Bottom nav reveal */
+.nav-reveal {
+  animation: navReveal 1s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
+  opacity: 0;
+  transform: translate(-50%, 40px);
+}
+
+@keyframes navReveal {
+  from { opacity: 0; transform: translate(-50%, 40px); }
+  to   { opacity: 1; transform: translate(-50%, 0); }
 }
 
 .section-scroll {

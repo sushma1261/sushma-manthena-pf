@@ -195,12 +195,12 @@ export const experienceData = [
 export const projectsData = [
   {
     title: "iHyre",
-    subtitle: "AI Interview Platform",
+    // subtitle: "AI Interview Platform",
     description:
       "An AI-powered interview platform that orchestrates LLM-driven interview agents, record/review flows and provides scoring and feedback to candidates.",
     skills: ["Node.js", "GenAI", "ReactJS", "Typescript"],
-    demo: "https://mock-interview-frontend-peach.vercel.app/",
-    github: "https://github.com/sushma-manthena/MockItUp",
+    // demo: "http://129.146.142.201/",
+    github: "https://github.com/sushma1261/MockInterview",
     // metrics: ["5x hiring throughput"],
     image: interview,
   },
