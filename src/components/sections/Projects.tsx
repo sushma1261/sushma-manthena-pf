@@ -34,12 +34,18 @@ const skillIcons: Record<string, JSX.Element> = {
   GenAI: <GiArtificialIntelligence className="w-4 h-4" />,
 };
 
-const ProjectCard = ({ project, isCentered }: { project: any; isCentered: boolean }) => {
+const ProjectCard = ({
+  project,
+  isCentered,
+}: {
+  project: any;
+  isCentered: boolean;
+}) => {
   return (
     <Card
       className={`overflow-hidden transition-all duration-500 border-border/40 group flex flex-col h-full ${
-        isCentered 
-          ? "scale-100 opacity-100 shadow-xl border-teal-500/60" 
+        isCentered
+          ? "scale-100 opacity-100 shadow-xl border-teal-500/60"
           : "scale-90 opacity-60 blur-[2px]"
       }`}
     >
@@ -55,7 +61,9 @@ const ProjectCard = ({ project, isCentered }: { project: any; isCentered: boolea
                   type="image/webp"
                 />
               ))}
-            {project.imageWebp && <source srcSet={project.imageWebp} type="image/webp" />}
+            {project.imageWebp && (
+              <source srcSet={project.imageWebp} type="image/webp" />
+            )}
             <img
               src={project.imageFallback || project.image}
               alt={project.title}
@@ -90,70 +98,68 @@ const ProjectCard = ({ project, isCentered }: { project: any; isCentered: boolea
         </div>
       ) : (
         <div className="h-64 bg-muted flex items-center justify-center group-hover:bg-muted/80 transition-colors relative overflow-hidden shrink-0">
-             <div 
-                className="absolute inset-0 opacity-10 bg-grid-black/[0.2] dark:bg-grid-white/[0.2]"
-             />
-             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4 z-10">
-                {project.demo && (
-                  <a
-                    href={project.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 bg-white rounded-full hover:scale-110 transition-transform"
-                    title="View Demo"
-                  >
-                    <ExternalLink className="h-5 w-5 text-gray-900" />
-                  </a>
-                )}
-                {project.github && (
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 bg-white rounded-full hover:scale-110 transition-transform"
-                    title="View Code"
-                  >
-                    <Github className="h-5 w-5 text-gray-900" />
-                  </a>
-                )}
-              </div>
+          <div className="absolute inset-0 opacity-10 bg-grid-black/[0.2] dark:bg-grid-white/[0.2]" />
+          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4 z-10">
+            {project.demo && (
+              <a
+                href={project.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 bg-white rounded-full hover:scale-110 transition-transform"
+                title="View Demo"
+              >
+                <ExternalLink className="h-5 w-5 text-gray-900" />
+              </a>
+            )}
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 bg-white rounded-full hover:scale-110 transition-transform"
+                title="View Code"
+              >
+                <Github className="h-5 w-5 text-gray-900" />
+              </a>
+            )}
+          </div>
         </div>
       )}
-      
+
       <div className="p-6 flex flex-col flex-grow">
         <h3 className="font-bold text-xl mb-2 group-hover:text-teal-600 transition-colors">
-            {project.title}
+          {project.title}
         </h3>
         {project.subtitle && (
-            <p className="text-sm text-teal-600 font-medium mb-2">
+          <p className="text-sm text-teal-600 font-medium mb-2">
             {project.subtitle}
-            </p>
+          </p>
         )}
         <p className="text-muted-foreground text-sm mb-4 flex-grow line-clamp-4">
-            {project.description}
+          {project.description}
         </p>
         <div className="flex flex-wrap gap-2 mb-4">
-            {project.skills.map((skill: string, i: number) => (
+          {project.skills.map((skill: string, i: number) => (
             <span
-                key={i}
-                className="text-xs px-2 py-1 bg-muted rounded-md font-medium flex items-center gap-1"
+              key={i}
+              className="text-xs px-2 py-1 bg-muted rounded-md font-medium flex items-center gap-1"
             >
-                {skillIcons[skill]}
-                {skill}
+              {skillIcons[skill]}
+              {skill}
             </span>
-            ))}
+          ))}
         </div>
         {project.metrics && (
-            <div className="flex gap-2 mt-auto">
+          <div className="flex gap-2 mt-auto">
             {project.metrics.map((metric: string, i: number) => (
-                <span
+              <span
                 key={i}
                 className="text-xs font-bold text-teal-600 bg-teal-50 dark:bg-teal-900/20 px-2 py-1 rounded"
-                >
+              >
                 {metric}
-                </span>
+              </span>
             ))}
-            </div>
+          </div>
         )}
       </div>
     </Card>
@@ -206,12 +212,13 @@ const Projects = forwardRef<HTMLElement>((props, ref) => {
       isProgrammaticScrollRef.current = true;
       const cardWidth = 600 + 32; // card width + gap
       const containerWidth = carouselRef.current.offsetWidth;
-      const scrollPosition = currentIndex * cardWidth - (containerWidth / 2 - cardWidth / 2);
+      const scrollPosition =
+        currentIndex * cardWidth - (containerWidth / 2 - cardWidth / 2);
       carouselRef.current.scrollTo({
         left: scrollPosition,
-        behavior: 'smooth'
+        behavior: "smooth",
       });
-      
+
       // Reset flag after scroll completes
       setTimeout(() => {
         isProgrammaticScrollRef.current = false;
@@ -236,21 +243,24 @@ const Projects = forwardRef<HTMLElement>((props, ref) => {
         const scrollLeft = carousel.scrollLeft;
         const cardWidth = 600 + 32; // card width + gap
         const containerWidth = carousel.offsetWidth;
-        
+
         // Calculate which card is closest to center
         const centerOffset = containerWidth / 2 - cardWidth / 2;
         const newIndex = Math.round((scrollLeft + centerOffset) / cardWidth);
-        const clampedIndex = Math.max(0, Math.min(newIndex, projectsData.length - 1));
-        
+        const clampedIndex = Math.max(
+          0,
+          Math.min(newIndex, projectsData.length - 1),
+        );
+
         if (clampedIndex !== currentIndex) {
           setCurrentIndex(clampedIndex);
         }
       }, 100);
     };
 
-    carousel.addEventListener('scroll', handleScroll, { passive: true });
+    carousel.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
-      carousel.removeEventListener('scroll', handleScroll);
+      carousel.removeEventListener("scroll", handleScroll);
       clearTimeout(scrollTimeout);
     };
   }, [currentIndex]);
@@ -265,7 +275,7 @@ const Projects = forwardRef<HTMLElement>((props, ref) => {
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     if (contentRef.current) {
@@ -276,30 +286,40 @@ const Projects = forwardRef<HTMLElement>((props, ref) => {
   }, []);
 
   return (
-    <section ref={ref} id="projects" className="section-scroll overflow-hidden">
-      <div className="opacity-0" ref={contentRef}>
-        <h2 className="text-2xl font-bold mb-8 flex items-center gap-2">
-          <SquareTerminal className="h-6 w-6 text-teal-600" />
+    <section
+      ref={ref}
+      id="projects"
+      className="section-scroll overflow-hidden py-20"
+    >
+      <div
+        className="container mx-auto px-4 md:px-6 opacity-0"
+        ref={contentRef}
+      >
+        <h2 className="text-3xl font-bold mb-12 flex items-center gap-3">
+          <SquareTerminal className="h-8 w-8 text-teal-600" />
           Projects
         </h2>
-        
+
         {/* Carousel Container */}
-        <div 
+        <div
           ref={carouselRef}
           className="relative overflow-x-auto scrollbar-hide pb-8"
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
           <div className="flex gap-8 px-4 md:px-8">
             {projectsData.map((project, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className={`flex-shrink-0 w-[85vw] md:w-[600px] transition-all duration-500 ${
                   index === currentIndex ? "scale-110" : "scale-100"
                 }`}
               >
-                <ProjectCard project={project} isCentered={index === currentIndex} />
+                <ProjectCard
+                  project={project}
+                  isCentered={index === currentIndex}
+                />
               </div>
             ))}
           </div>
@@ -326,4 +346,3 @@ const Projects = forwardRef<HTMLElement>((props, ref) => {
 });
 
 export default Projects;
-

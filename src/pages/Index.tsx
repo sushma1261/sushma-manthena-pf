@@ -1,18 +1,75 @@
-import { MobileNav } from "@/components/MobileNav";
-import { TopNav } from "@/components/TopNav";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import Education from "@/components/sections/Education";
 import Experience from "@/components/sections/Experience";
 import Footer from "@/components/sections/Footer";
 import Hero from "@/components/sections/Hero";
-import Intro from "@/components/sections/Intro";
 import Projects from "@/components/sections/Projects";
 import Skills from "@/components/sections/Skills";
+import {
+  BriefcaseBusiness,
+  Code,
+  GraduationCap,
+  Home,
+  Layers,
+  Mail,
+} from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 
-const Index = () => {
-  const [activeSection, setActiveSection] = useState("experience");
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+// --- Floating Dock Component ---
+const FloatingDock = ({
+  activeSection,
+  scrollToSection,
+}: {
+  activeSection: string;
+  scrollToSection: (id: string) => void;
+}) => {
+  const navItems = [
+    { id: "hero", icon: Home, label: "Home" },
+    { id: "experience", icon: BriefcaseBusiness, label: "Experience" },
+    { id: "projects", icon: Layers, label: "Projects" },
+    { id: "skills", icon: Code, label: "Skills" },
+    { id: "education", icon: GraduationCap, label: "Education" },
+    { id: "contact", icon: Mail, label: "Contact" },
+  ];
 
+  return (
+    <div className="fixed bottom-8 left-0 right-0 flex justify-center z-50 pointer-events-none animate-fadeIn">
+      <nav className="flex items-center gap-1 bg-background/80 backdrop-blur-md border border-border/40 shadow-2xl rounded-full p-2 px-3 pointer-events-auto">
+        {navItems.map((item) => {
+          const Icon = item.icon;
+          const isActive =
+            activeSection === item.id || (item.id === "hero" && !activeSection);
+
+          return (
+            <button
+              key={item.id}
+              onClick={() => scrollToSection(item.id)}
+              className={`relative p-2.5 rounded-full transition-all duration-300 group
+                  ${
+                    isActive
+                      ? "bg-foreground text-background scale-110 shadow-lg"
+                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                  }`}
+              aria-label={item.label}
+            >
+              <Icon className="h-5 w-5" />
+
+              {/* Tooltip */}
+              <span className="absolute -top-10 left-1/2 -translate-x-1/2 bg-foreground text-background text-xs font-medium px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                {item.label}
+              </span>
+            </button>
+          );
+        })}
+      </nav>
+    </div>
+  );
+};
+
+const Index = () => {
+  const [activeSection, setActiveSection] = useState("hero");
+
+  const heroRef = useRef<HTMLElement>(null);
   const experienceRef = useRef<HTMLElement>(null);
   const educationRef = useRef<HTMLElement>(null);
   const projectsRef = useRef<HTMLElement>(null);
@@ -21,13 +78,14 @@ const Index = () => {
 
   const sectionRefs = useMemo(
     () => ({
+      hero: heroRef,
       experience: experienceRef,
       education: educationRef,
       projects: projectsRef,
       skills: skillsRef,
       contact: contactRef,
     }),
-    [experienceRef, educationRef, projectsRef, skillsRef, contactRef]
+    [],
   );
 
   useEffect(() => {
@@ -36,67 +94,104 @@ const Index = () => {
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              console.log("Section in view:", id);
               setActiveSection(id);
             }
           });
         },
-        {
-          // threshold: 0.5, // Trigger when 50% of the section is visible
-          rootMargin: "-50% 0px -50% 0px", // Adjust margins to better detect the active section
-        }
+        { threshold: 0.5 },
       );
 
       if (ref.current) {
         observer.observe(ref.current);
       }
 
-      return observer;
+      return { id, observer };
     });
 
-    // Cleanup observers on unmount
     return () => {
-      observers.forEach((observer) => observer.disconnect());
+      observers.forEach(({ id, observer }) => {
+        const ref = sectionRefs[id as keyof typeof sectionRefs];
+        if (ref.current) {
+          observer.unobserve(ref.current);
+        }
+      });
     };
   }, [sectionRefs]);
 
-  const scrollToSection = (section: string) => {
-    console.log("Scrolling to section:", section);
-    sectionRefs[section as keyof typeof sectionRefs].current?.scrollIntoView({
-      behavior: "smooth",
-    });
-    setActiveSection(section);
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      const offset = 0; // Floating dock doesn't require offset like top nav
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+      setActiveSection(id);
+    }
   };
 
   return (
-    <div className="min-h-screen">
-      <TopNav />
+    <div className="min-h-screen bg-background text-foreground font-sans selection:bg-teal-500/30 relative">
+      {/* Theme Toggle */}
+      <div className="fixed top-6 right-6 z-50 animate-fadeIn">
+        <ThemeToggle />
+      </div>
 
-      <header className="fixed top-0 left-0 right-0 h-12 border-b bg-background/80 backdrop-blur-sm z-50 md:hidden">
-        <div className="flex items-center justify-between h-full px-4">
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="text-base font-bold hover:text-teal-600 transition-colors"
-          >
-            Sushma Manthena
-          </button>
-          <MobileNav />
-        </div>
-      </header>
+      <FloatingDock
+        activeSection={activeSection}
+        scrollToSection={scrollToSection}
+      />
 
-      <main className="pt-0">
-        <Hero />
-        <Intro />
+      {/* Global Background Grid - Increased Visibility */}
+      <div
+        className="fixed inset-0 -z-30 pointer-events-none dark:hidden"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, rgba(0, 0, 0, 0.08) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(0, 0, 0, 0.08) 1px, transparent 1px)
+          `,
+          backgroundSize: "40px 40px",
+        }}
+      />
+      <div
+        className="fixed inset-0 -z-30 pointer-events-none hidden dark:block"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px)
+          `,
+          backgroundSize: "40px 40px",
+        }}
+      />
 
-        <div className="max-w-5xl mx-auto px-4 py-20 space-y-32">
-          <Experience ref={sectionRefs.experience} />
-          <Education ref={sectionRefs.education} />
-          <Skills ref={sectionRefs.skills} />
-          <Projects ref={sectionRefs.projects} />
-        </div>
+      <main className="pb-24">
+        <section id="hero" ref={heroRef}>
+          <Hero />
+        </section>
 
-        <Footer ref={sectionRefs.contact} />
+        <section id="experience" ref={experienceRef}>
+          <Experience />
+        </section>
+
+        <section id="projects" ref={projectsRef}>
+          <Projects />
+        </section>
+
+        <section id="skills" ref={skillsRef} className="bg-muted/30">
+          <Skills />
+        </section>
+
+        <section id="education" ref={educationRef}>
+          <Education />
+        </section>
       </main>
+
+      <section id="contact" ref={contactRef}>
+        <Footer />
+      </section>
     </div>
   );
 };

@@ -19,7 +19,7 @@ const Education = forwardRef<HTMLElement>((props, ref) => {
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     if (contentRef.current) {
@@ -30,9 +30,12 @@ const Education = forwardRef<HTMLElement>((props, ref) => {
   }, []);
 
   return (
-    <section ref={ref} id="education" className="section-scroll">
-      <div className="opacity-0" ref={contentRef}>
-        <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
+    <section ref={ref} id="education" className="section-scroll py-20">
+      <div
+        className="container mx-auto px-4 md:px-6 opacity-0"
+        ref={contentRef}
+      >
+        <h2 className="text-3xl font-bold mb-12 flex items-center gap-3">
           <GraduationCap className="h-8 w-8 text-teal-600" />
           Education
         </h2>

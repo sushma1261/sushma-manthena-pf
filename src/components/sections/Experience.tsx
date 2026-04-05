@@ -115,7 +115,7 @@ const Experience = forwardRef<HTMLElement>((props, ref) => {
   };
 
   return (
-    <section ref={ref} id="experience" className="section-padding py-20">
+    <section ref={ref} id="experience" className="py-20">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center gap-3 mb-12">
           <div className="p-2 bg-teal-100 dark:bg-teal-900/30 rounded-lg">
